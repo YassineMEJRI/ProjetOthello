@@ -1,0 +1,67 @@
+# depslib dependency file v1.0
+1618230007 source:/home/yecin/CodeBlocks/OthelloGame_V0.1/src/Case.cpp
+	"Case.h"
+
+1618230007 /home/yecin/CodeBlocks/OthelloGame_V0.1/include/Case.h
+
+1618231057 source:/home/yecin/CodeBlocks/OthelloGame_V0.1/main.cpp
+	<iostream>
+	"Game.h"
+
+1618230411 /home/yecin/CodeBlocks/OthelloGame_V0.1/include/Game.h
+	"Player.h"
+	"Othellier.h"
+
+1618230183 /home/yecin/CodeBlocks/OthelloGame_V0.1/include/Player.h
+	<string>
+
+1618230096 /home/yecin/CodeBlocks/OthelloGame_V0.1/include/Othellier.h
+	"Case.h"
+	<iostream>
+
+1618231102 source:/home/yecin/CodeBlocks/OthelloGame_V0.1/src/Othellier.cpp
+	"Othellier.h"
+	<iostream>
+
+1618230822 source:/home/yecin/CodeBlocks/OthelloGame_V0.1/src/Game.cpp
+	"Game.h"
+	<string>
+
+1618230742 source:/home/yecin/CodeBlocks/OthelloGame_V0.1/src/Player.cpp
+	"Player.h"
+	<iostream>
+	<string>
+
+1618231057 source:d:\othellogame_v0.1\main.cpp
+	<iostream>
+	"Game.h"
+
+1618230007 source:d:\othellogame_v0.1\src\case.cpp
+	"Case.h"
+
+1618230822 source:d:\othellogame_v0.1\src\game.cpp
+	"Game.h"
+	<string>
+
+1618250524 source:d:\othellogame_v0.1\src\othellier.cpp
+	"../include/Othellier.h"
+	<iostream>
+
+1618230742 source:d:\othellogame_v0.1\src\player.cpp
+	"Player.h"
+	<iostream>
+	<string>
+
+1618230096 d:\othellogame_v0.1\include\othellier.h
+	"Case.h"
+	<iostream>
+
+1618230007 d:\othellogame_v0.1\include\case.h
+
+1618230411 d:\othellogame_v0.1\include\game.h
+	"Player.h"
+	"Othellier.h"
+
+1618230183 d:\othellogame_v0.1\include\player.h
+	<string>
+
