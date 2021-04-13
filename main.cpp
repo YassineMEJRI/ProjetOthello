@@ -21,5 +21,5 @@ int main()
             k.jouerTour(k,nb);
         }while(k.othellier.getnbPionsTotale()<64);
         }
-    return 0;
+    return 0; // hello
 }
