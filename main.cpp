@@ -7,6 +7,7 @@ using namespace std;
 
 int main()
 {
+	//comment to test
     string c;
     int a,b;
     cout<<"tapez Start to initializate the game"<<endl;
