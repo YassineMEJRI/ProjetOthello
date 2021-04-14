@@ -1,4 +1,4 @@
-#include "../include/Case.h"
+#include "Case.h"
 
 int Case :: compteurId = 0;
 Case::Case()

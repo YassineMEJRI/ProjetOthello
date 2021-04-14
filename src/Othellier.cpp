@@ -1,12 +1,12 @@
-#include "../include/Othellier.h"
+#include "Othellier.h"
 #include <iostream>
-using namespace std;
-Othellier::Othellier()
-{        nbPionsTotale = 4 ;
-         grille[3][3].setCouleur(0);
-         grille[4][4].setCouleur(0);
-         grille[3][4].setCouleur(1);
-         grille[4][3].setCouleur(1);
+
+Othellier::Othellier(){
+        nbPionsTotale = 4 ;
+        grille[3][3].setCouleur(0);
+        grille[4][4].setCouleur(0);
+        grille[3][4].setCouleur(1);
+        grille[4][3].setCouleur(1);
 }
 
 int Othellier::ajouterPion(int posx ,int posy ,int couleur ){
@@ -14,8 +14,8 @@ int Othellier::ajouterPion(int posx ,int posy ,int couleur ){
 }
 void Othellier::accessPions(int couleur){
     // black test
-    cout<<couleur<<endl;
-    string access="";
+    std::cout<<couleur<<std::endl;
+    std::string access="";
     int couleuradd = 1;
     if (couleur == 1 ) {couleuradd = 0;}
     for( int i = 0 ; i<8 ;i++)
@@ -26,23 +26,23 @@ void Othellier::accessPions(int couleur){
              do{k++;}while((grille[i][k].getCouleur() == couleuradd));
              if ((8>k)&&(j+1<k)&&(grille[i][k].getCouleur()==-1)){
                 access = (char)(97+k);
-                cout <<" | " << access <<","<< i+1;}
+                std::cout <<" | " << access <<","<< i+1;}
              k = j;
              do{k--;}while((grille[i][k].getCouleur() == couleuradd));
              if ((j-1>k)&&(grille[i][k].getCouleur()==-1)&&(0<=k)){
                 access = (char)(97+k);
-                cout <<" | " << access <<","<< i+1;}
+                std::cout <<" | " << access <<","<< i+1;}
             //--------------- vertical verification --------------------
                 k = i;
              do{k++;}while((grille[k][j].getCouleur() == couleuradd));
              if ((8>k)&&(j+1<k)&&(grille[k][j].getCouleur() == -1)){
                 access = (char)(97+j);
-                cout <<" | " << access <<","<< k+1;}
+                std::cout <<" | " << access <<","<< k+1;}
                 k = i;
              do{k--;}while((grille[k][j].getCouleur() == couleuradd));
              if ((j-1>k)&&(0<=k)&&(grille[k][j].getCouleur() == -1)){
                 access = (char)(97+j);
-                cout <<" | " << access <<","<< k+1;}
+                std::cout <<" | " << access <<","<< k+1;}
 
             //--------------- verification diagonal sup --------------------
              k=i;
@@ -50,44 +50,44 @@ void Othellier::accessPions(int couleur){
              do{k++; k1 ++; }while((grille[k][k1].getCouleur() == couleuradd));
              if ((j+1<k1)&&(i+1<k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
-                cout <<" | " << access <<","<< k+1;}
+                std::cout <<" | " << access <<","<< k+1;}
 
              k=i;
              k1 = j;
              do{k--; k1 --; }while((grille[k][k1].getCouleur() == couleuradd));
              if ((j-1>k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
-                cout <<" | " << access <<","<< k+1;}
+                std::cout <<" | " << access <<","<< k+1;}
              k=i;
              k1 = j;
              do{k++; k1 --; }while((grille[k][k1].getCouleur() == couleuradd));
              if ((j-1>k1)&&(i+1<k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
-                cout <<" | " << access <<","<< k+1;}
+                std::cout <<" | " << access <<","<< k+1;}
              k=i;
              k1 = j;
              do{k--; k1 ++; }while((grille[k][k1].getCouleur() == couleuradd));
              if ((j-1>k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
-                cout <<" | " << access <<","<< k+1;}
+                std::cout <<" | " << access <<","<< k+1;}
         }
     }
     }}
 void  Othellier :: printBoard()
 {system("cls");
-cout << "    a   b   c   d   e   f   g   h   " <<endl;
+std::cout << "    a   b   c   d   e   f   g   h   " <<std::endl;
         for ( int i =0 ; i<8; i++)
             {
-              cout  << " -+---+---+---+---+---+---+---+---+" << endl ;
-              cout << i + 1 ;
+              std::cout  << " -+---+---+---+---+---+---+---+---+" <<std::endl ;
+              std::cout << i + 1 ;
               for ( int j =0 ; j<8; j++)
-              { cout << " |" ;
-                if (grille[i][j].getCouleur() == -1 ){cout << "  " ;}
-                else if (grille[i][j].getCouleur() == 0){cout << " b" ;}
-                     else {cout << " n" ;}}
-                cout<< " |"<<endl;
+              { std::cout << " |" ;
+                if (grille[i][j].getCouleur() == -1 ){std::cout << "  " ;}
+                else if (grille[i][j].getCouleur() == 0){std::cout << " b" ;}
+                     else {std::cout << " n" ;}}
+                std::cout<< " |"<<std::endl;
               }
-cout  << " ----------------------------------" << endl ;
+std::cout  << " ----------------------------------" << std::endl ;
 }
 Othellier::~Othellier()
 {
@@ -98,3 +98,7 @@ int Othellier::incrementer(){
 }
 int Othellier::getnbPionsTotale(){
 return this->nbPionsTotale;}
+
+Case Othellier::getCase(int x, int y){
+    return grille[x][y];
+}

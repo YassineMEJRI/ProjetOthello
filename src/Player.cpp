@@ -1,15 +1,25 @@
-#include "../include/Player.h"
+#include "Player.h"
 #include <iostream>
 #include <string>
 
 Player::Player(){
-    this->nbPions = 2;
-     cout<< "taper le nom du joueur :"<<endl;
-     cin>>this->name;}
+     nbPions = 2;
+     std::cout<< "taper le nom du joueur :"<<std::endl;
+     std::cin>>name;
+}
+
 void Player::SetcolorPlayer(Player &a,int colore){
- a.color = colore;}
- string Player::Getname(Player a){
+    a.color = colore;
+}
+
+ std::string Player::Getname(Player a){
      return a.name;
  }
  int Player::getcolor(){
- return this->color;}
+ return color;}
+
+ int Player::increment_nbPion(int nb){
+    nbPions += nb;
+    return 0;
+ }
+ Player::~Player(){}

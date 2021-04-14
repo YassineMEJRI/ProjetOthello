@@ -6,21 +6,23 @@
 class Game
 {
     public:
-    Game();
-    Player players[2];
-    Othellier othellier;
-    int update();
-    void initiate();
-    int jouerTour(Game &k,int &c);
-    int gameOver();
-    Player getWinner();
-    int compterPieces(int couleur);
-    Case* getPossibleMoves(int couleur);
+        Game();
+        int update();
+        void initiate();
+        int jouerTour(Game &k,int &c);
+        int gameOver();
+        Player getWinner();
+        int compterPieces(int couleur);
+        Case* getPossibleMoves(int couleur);
+        int scoreupdate();
+        Othellier getOthellier();
         virtual ~Game();
 
     protected:
 
     private:
+        Othellier othellier;
+        Player players[2];
 };
 
 #endif // GAME_H

@@ -11,10 +11,10 @@ class Othellier
        ~Othellier();
         int incrementer();
         int getnbPionsTotale();
-    protected:
-
+        void accessPions(int);
+        Othellier getOthellier();
+        Case getCase(int, int);
     private:
-        friend class Game;
         Case grille [8][8] ;
         int nbPionsTotale = 0 ;
 };

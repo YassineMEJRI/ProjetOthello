@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/Game.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ int main()
         int nb = 2 ;
         do {
             k.jouerTour(k,nb);
-        }while(k.othellier.getnbPionsTotale()<64);
+        }while(k.getOthellier().getnbPionsTotale()<64);
         }
     return 0;
 }
