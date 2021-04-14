@@ -7,16 +7,14 @@ class Game
 {
     public:
         Game();
-        int update();
         void initiate();
         int jouerTour(int &c);
-        int gameOver();
         Player getWinner();
         int compterPieces(int couleur);
-        Case* getPossibleMoves(int couleur);
         int scoreupdate();
         Othellier getOthellier();
         virtual ~Game();
+        /*int gameOver();*/
 
     protected:
 

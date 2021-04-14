@@ -1,21 +1,21 @@
-#include "Game.h"
+#include "../include/Game.h"
 #include <string>
 int trouverDansTab(int* tab, int x);
 Game::Game(){}
 Game::~Game(){}
 int Game::scoreupdate()
 {
-    this->players[0].setNbPions();
-    this->players[1].setNbPions();
+  players[0].setNbPions();
+  players[1].setNbPions();
 for ( int i =0 ; i<8; i++)
 {
 for ( int j =0 ; j<8; j++)
 {
-    if (this->othellier.getCase(i,j).getCouleur() == -1 ){}
-    else if (this->othellier.getCase(i,j).getCouleur() == 0)
-        {this->players[0].increment_nbPion(1);}
+    if (othellier.getCase(i,j).getCouleur() == -1 ){}
+    else if (othellier.getCase(i,j).getCouleur() == 0)
+        {players[0].increment_nbPion(1);}
         else
-        {this->players[1].increment_nbPion(1);}}
+        {players[1].increment_nbPion(1);}}
 }}
 int Game::jouerTour(int &c){
     int* tab;
@@ -27,16 +27,17 @@ int Game::jouerTour(int &c){
         do{
             std::string nom = players[0].getName();
             std::cout<<nom<<" play now"<<std::endl;
-            tab = othellier.accessPions(players[0].getcolor());
+            tab = othellier.Possiblemoves(players[0].getcolor());
             std::cout<<std::endl;
             std::cout<<"ajouter la position du point sous la forme ' lettreChiffre '"<<std::endl;
             std::cin>>a[0]>>a[1];
             y = (a[0]-'a');
             x = (a[1]-'1');
-            std::cout << "id entree  " << othellier.getCase(x,y).getId() << std::endl;
+           /* std::cout << "id entree  " << othellier.getCase(x,y).getId() << std::endl;*/
         }while(othellier.getCase(x,y).getCouleur()!=-1 || !trouverDansTab(tab, othellier.getCase(x,y).getId()));
 
         othellier.ajouterPion(x,y,players[0].getcolor());
+        othellier.changerPion(x,y,players[0].getcolor()) ;
         othellier.printBoard();
         }
     else
@@ -44,14 +45,15 @@ int Game::jouerTour(int &c){
         do{
             std::string nom = players[1].getName();
             std::cout<<nom<<" play now"<<std::endl;
-            othellier.accessPions(players[1].getcolor());
+            tab = othellier.Possiblemoves(players[1].getcolor());
             std::cout<<std::endl;
             std::cout<<"ajouter la position du point sous la forme ' lettreChiffre '"<<std::endl;
             std::cin>>a[0]>>a[1];
             y = a[0]-'a';
             x = a[1]-'1';
-        }while(othellier.getCase(x,y).getCouleur()!=-1);
+        }while(othellier.getCase(x,y).getCouleur()!=-1 || !trouverDansTab(tab, othellier.getCase(x,y).getId()));
         othellier.ajouterPion ((int)(a[1]-'1'),(int)(a[0]-'a'),players[1].getcolor());
+        othellier.changerPion(x,y,players[1].getcolor()) ;
         othellier.printBoard();
         }
         c++;
@@ -69,19 +71,13 @@ void Game::initiate()
 
     othellier.printBoard();
 }
-int Game::update()
-{   othellier.incrementer();
-    othellier.printBoard();
-}
+
+
 
 Othellier Game::getOthellier(){
     return othellier;
 }
-/* Case* Game:: getPossibleMoves(int couleur)
- {
-     if (grille[i][j].getCouleur()==-1)
- }
-*/
+
 
 int trouverDansTab(int* tab, int x){
     for(int i =0; i < 64; i++){

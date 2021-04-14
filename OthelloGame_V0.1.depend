@@ -103,3 +103,36 @@
 	"Othellier.h"
 	<iostream>
 
+1618429825 source:c:\users\mariem\desktop\depotlocal\projetothello\main.cpp
+	<iostream>
+	"Game.h"
+
+1618429825 source:c:\users\mariem\desktop\depotlocal\projetothello\src\case.cpp
+	"Case.h"
+
+1618439636 source:c:\users\mariem\desktop\depotlocal\projetothello\src\game.cpp
+	"../include/Game.h"
+	<string>
+
+1618440683 source:c:\users\mariem\desktop\depotlocal\projetothello\src\othellier.cpp
+	"../include/Game.h"
+	<iostream>
+
+1618429825 source:c:\users\mariem\desktop\depotlocal\projetothello\src\player.cpp
+	"Player.h"
+	<iostream>
+	<string>
+
+1618435733 c:\users\mariem\desktop\depotlocal\projetothello\include\game.h
+	"Player.h"
+	"Othellier.h"
+
+1618429825 c:\users\mariem\desktop\depotlocal\projetothello\include\player.h
+	<string>
+
+1618435745 c:\users\mariem\desktop\depotlocal\projetothello\include\othellier.h
+	"Case.h"
+	<iostream>
+
+1618429814 c:\users\mariem\desktop\depotlocal\projetothello\include\case.h
+
