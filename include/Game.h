@@ -9,7 +9,7 @@ class Game
         Game();
         int update();
         void initiate();
-        int jouerTour(Game &k,int &c);
+        int jouerTour(int &c);
         int gameOver();
         Player getWinner();
         int compterPieces(int couleur);

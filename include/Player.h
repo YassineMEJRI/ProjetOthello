@@ -7,11 +7,11 @@ class Player
 {
     public:
         Player();
-        std::string Getname(Player a);
+        std::string getName();
         int getcolor();
-        void SetcolorPlayer(Player &a ,int b);
-        int getnbpoint(){ return nbPions;};
-        int setnbpoint(){ nbPions = 0;};
+        void setCouleur(int coul);
+        int getNbPions();
+        int setNbPions();
         int increment_nbPion(int);
         virtual ~Player();
 

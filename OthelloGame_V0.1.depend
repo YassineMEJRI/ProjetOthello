@@ -70,18 +70,18 @@
 
 1618230008 c:\users\mourad sellami\desktop\othellogame_v0.1\include\case.h
 
-1618362376 source:c:\users\yassi\projects\othello\projetothello\main.cpp
+1618402004 source:c:\users\yassi\projects\othello\projetothello\main.cpp
 	<iostream>
 	"Game.h"
 
-1618362365 c:\users\yassi\projects\othello\projetothello\include\game.h
+1618401992 c:\users\yassi\projects\othello\projetothello\include\game.h
 	"Player.h"
 	"Othellier.h"
 
-1618358312 c:\users\yassi\projects\othello\projetothello\include\player.h
+1618406501 c:\users\yassi\projects\othello\projetothello\include\player.h
 	<string>
 
-1618362861 c:\users\yassi\projects\othello\projetothello\include\othellier.h
+1618408284 c:\users\yassi\projects\othello\projetothello\include\othellier.h
 	"Case.h"
 	<iostream>
 
@@ -90,16 +90,16 @@
 1618359791 source:c:\users\yassi\projects\othello\projetothello\src\case.cpp
 	"Case.h"
 
-1618363254 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
+1618406559 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
 	"Player.h"
 	<iostream>
 	<string>
 
-1618363638 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
+1618427967 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
 	"Game.h"
 	<string>
 
-1618363128 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
+1618427908 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
 	"Othellier.h"
 	<iostream>
 

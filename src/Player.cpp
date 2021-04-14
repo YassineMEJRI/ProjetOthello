@@ -8,12 +8,12 @@ Player::Player(){
      std::cin>>name;
 }
 
-void Player::SetcolorPlayer(Player &a,int colore){
-    a.color = colore;
+void Player::setCouleur(int coul){
+    color = coul;
 }
 
- std::string Player::Getname(Player a){
-     return a.name;
+ std::string Player::getName(){
+     return name;
  }
  int Player::getcolor(){
  return color;}
@@ -22,4 +22,11 @@ void Player::SetcolorPlayer(Player &a,int colore){
     nbPions += nb;
     return 0;
  }
+
+int Player::getNbPions(){
+     return nbPions;
+}
+int Player::setNbPions(){
+    nbPions = 0;
+}
  Player::~Player(){}

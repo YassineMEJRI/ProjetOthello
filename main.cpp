@@ -7,7 +7,7 @@ int main()
 {
     string c;
     int a,b;
-    cout<<"tapez Start to initializate the game"<<endl;
+    cout<<"type \"start\" to initializate the game"<<endl;
     cin>> c;
     if (c=="start"){
         system("CLS");
@@ -16,7 +16,7 @@ int main()
         k.initiate();
         int nb = 2 ;
         do {
-            k.jouerTour(k,nb);
+            k.jouerTour(nb);
         }while(k.getOthellier().getnbPionsTotale()<64);
         }
     return 0;
