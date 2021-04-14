@@ -6,8 +6,8 @@
 class Game
 {
     public:
-        Game();
-        Player players[2];
+    Game();
+    Player players[2];
     Othellier othellier;
     int update();
     void initiate();

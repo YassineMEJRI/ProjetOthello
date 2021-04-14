@@ -8,9 +8,11 @@ class Player
     public:
         Player();
         std::string Getname(Player a);
-int getcolor();
-void SetcolorPlayer(Player &a ,int b);
-int increment_nbPion(int);
+        int getcolor();
+        void SetcolorPlayer(Player &a ,int b);
+        int getnbpoint(){ return nbPions;};
+        int setnbpoint(){ nbPions = 0;};
+        int increment_nbPion(int);
         virtual ~Player();
 
     protected:
