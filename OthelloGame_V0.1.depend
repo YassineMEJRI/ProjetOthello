@@ -110,7 +110,7 @@
 1618429825 source:c:\users\mariem\desktop\depotlocal\projetothello\src\case.cpp
 	"Case.h"
 
-1618439636 source:c:\users\mariem\desktop\depotlocal\projetothello\src\game.cpp
+1618517413 source:c:\users\mariem\desktop\depotlocal\projetothello\src\game.cpp
 	"../include/Game.h"
 	<string>
 
@@ -118,8 +118,8 @@
 	"../include/Game.h"
 	<iostream>
 
-1618429825 source:c:\users\mariem\desktop\depotlocal\projetothello\src\player.cpp
-	"Player.h"
+1618517438 source:c:\users\mariem\desktop\depotlocal\projetothello\src\player.cpp
+	"../include/Player.h"
 	<iostream>
 	<string>
 
@@ -127,7 +127,7 @@
 	"Player.h"
 	"Othellier.h"
 
-1618429825 c:\users\mariem\desktop\depotlocal\projetothello\include\player.h
+1618517413 c:\users\mariem\desktop\depotlocal\projetothello\include\player.h
 	<string>
 
 1618435745 c:\users\mariem\desktop\depotlocal\projetothello\include\othellier.h

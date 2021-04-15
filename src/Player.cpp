@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "../include/Player.h"
 #include <iostream>
 #include <string>
 
@@ -26,7 +26,7 @@ void Player::setCouleur(int coul){
 int Player::getNbPions(){
      return nbPions;
 }
-int Player::setNbPions(){
-    nbPions = 0;
+void Player::setNbPions(int x ){
+    nbPions = x; //
 }
  Player::~Player(){}

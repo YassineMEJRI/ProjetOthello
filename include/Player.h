@@ -11,7 +11,7 @@ class Player
         int getcolor();
         void setCouleur(int coul);
         int getNbPions();
-        int setNbPions();
+        void  setNbPions(int x );
         int increment_nbPion(int);
         virtual ~Player();
 
