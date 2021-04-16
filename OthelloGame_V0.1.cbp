@@ -38,6 +38,7 @@
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/Othellier.h" />
 		<Unit filename="include/Player.h" />
+		<Unit filename="include/common.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Case.cpp" />
 		<Unit filename="src/Game.cpp" />
