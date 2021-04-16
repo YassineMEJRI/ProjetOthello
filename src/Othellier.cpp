@@ -1,5 +1,6 @@
-#include "../include/Game.h"
+#include "Game.h"
 #include <iostream>
+#include "common.h"
 void init(int*);
 int tab[64]; //tableau qui contient les jeux possibles a chaque tour
 Othellier::Othellier(){
@@ -47,35 +48,22 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
                 }
 
             //--------------- vertical verification --------------------
-             /*   k = i;
-             do{k++;}while((grille[k][j].getCouleur() == couleuradd));
-             if ((8>k)&&(j+1<k)&&(grille[k][j].getCouleur() == -1)){
-                access = (char)(97+j);
-                std::cout <<" | " << access <<","<< k+1;
-                tab[tailleTab] = grille[k][access[0]-'a'].getId();
-                // std::cout << tab[tailleTab] <<std::endl;
-                tailleTab++;
-                }
-
-                k = i;
-             do{k--;}while((grille[k][j].getCouleur() == couleuradd));
-             if ((j-1>k)&&(0<=k)&&(grille[k][j].getCouleur() == -1)){
-                access = (char)(97+j);
-                std::cout <<" | " << access <<","<< k+1;
-                tab[tailleTab] = grille[k][access[0]-'a'].getId();
-              //  std::cout << tab[tailleTab] <<std::endl;
-                tailleTab++;
-                }*/
                 k=i;
              do{k++;}while((grille[k][j].getCouleur() == couleuradd));
              if ((8>k)&&(i+1<k)&&(grille[k][j].getCouleur()==-1)){
                 access = (char)(97+j);
-             std :: cout <<" | " << access <<","<< k+1;}
+             std :: cout <<" | " << access <<","<< k+1;
+             tab[tailleTab] = grille[k][access[0]-'a'].getId();
+             tailleTab++;
+             }
             k=i;
              do{k--;}while((grille[k][j].getCouleur() == couleuradd));
              if ((0<=k)&&(i-1>k)&&(grille[k][j].getCouleur()==-1)){
                 access = (char)(97+j);
-             std ::cout <<" | " << access <<","<< k+1;}
+             std ::cout <<" | " << access <<","<< k+1;
+             tab[tailleTab] = grille[k][access[0]-'a'].getId();
+             tailleTab++;
+             }
 
 
             //--------------- verification diagonal sup --------------------
@@ -109,7 +97,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
                 tab[tailleTab] = grille[k][access[0]-'a'].getId();
-//std::cout << tab[tailleTab] <<std::endl;
+                //std::cout << tab[tailleTab] <<std::endl;
                 tailleTab++;
                 }
 
@@ -132,20 +120,38 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
     return tab;
     }
 void  Othellier :: printBoard()
-{system("cls");
-std::cout << "    a   b   c   d   e   f   g   h   " <<std::endl;
+{
+    system("cls");
+    std::cout << "    a   b   c   d   e   f   g   h   " <<std::endl;
+//    log << "    a   b   c   d   e   f   g   h   " <<std::endl;
         for ( int i =0 ; i<8; i++)
             {
               std::cout  << " -+---+---+---+---+---+---+---+---+" <<std::endl ;
               std::cout << i + 1 ;
+//              log  << " -+---+---+---+---+---+---+---+---+" <<std::endl ;
+//              log << i + 1 ;
               for ( int j =0 ; j<8; j++)
-              { std::cout << " |" ;
-                if (grille[i][j].getCouleur() == -1 ){std::cout << "  " ;}
-                else if (grille[i][j].getCouleur() == 0){std::cout << " b" ;}
-                     else {std::cout << " n" ;}}
+              {
+                std::cout << " |" ;
+//                log << " |" ;
+                if (grille[i][j].getCouleur() == -1 ){
+                        std::cout << "  " ;
+//                        log << "  " ;
+                }
+                else if (grille[i][j].getCouleur() == 0){
+                        std::cout << " b" ;
+//                        log << " b" ;
+                }
+                     else {
+                            std::cout << " n" ;
+//                            log << " n" ;
+                     }
+                }
                 std::cout<< " |"<<std::endl;
+//                log<< " |"<<std::endl;
               }
 std::cout  << " ----------------------------------" << std::endl ;
+//log  << " ----------------------------------" << std::endl ;
 }
 Othellier::~Othellier()
 {

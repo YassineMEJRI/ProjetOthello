@@ -24,12 +24,12 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
     std::string a; // pour stocker l'entree du clavier
     std::cout<<"score du joueur "<<players[0].getName()<<" est : "<<players[0].getNbPions()<<std::endl;
     std::cout<<"score du joueur "<<players[1].getName()<<" est : "<<players[1].getNbPions()<<std::endl;
-    if ( (c % 2) == 0)  // tour du joueur 0
-        {
+   // if ( (c % 2) == 0)  // tour du joueur 0
+   //     {
         do{
-            std::string nom = players[0].getName();
+            std::string nom = players[c%2].getName();
             std::cout<<nom<<" play now"<<std::endl;
-            tab = othellier.Possiblemoves(players[0].getcolor()); // tableaux des id // possibles moves par rapport les couleurs
+            tab = othellier.Possiblemoves(players[c%2].getcolor()); // tableaux des id // possibles moves par rapport les couleurs
             std::cout<<std::endl;
             std::cout<<"ajouter la position du pion a jouer  sous la forme ' lettreChiffre '"<<std::endl; // lecture de lentree de joueur
             std::cin>>a[0]>>a[1]; // 1ere char 2 eme char
@@ -38,11 +38,11 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
            /* std::cout << "id entree  " << othellier.getCase(x,y).getId() << std::endl;*/
         }while(othellier.getCase(x,y).getCouleur()!=-1 || !trouverDansTab(tab, othellier.getCase(x,y).getId()));
      // test  si le choix de la case est convenable  //  trouver dans tab : chercher l id de la case jouee dans tab
-        othellier.ajouterPion(x,y,players[0].getcolor());
-        othellier.changerPion(x,y,players[0].getcolor()) ;
+        othellier.ajouterPion(x,y,players[c%2].getcolor());
+        othellier.changerPion(x,y,players[c%2].getcolor()) ;
         othellier.printBoard();
-        }
-    else // tour du jour 1
+      //  }
+  /*  else // tour du jour 1
         {
         do{
             std::string nom = players[1].getName();
@@ -58,6 +58,7 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
         othellier.changerPion(x,y,players[1].getcolor()) ; //
         othellier.printBoard(); //
         }
+        */
         c++;
         this->scoreupdate(); //
 }
