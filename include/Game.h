@@ -2,6 +2,7 @@
 #define GAME_H
 #include "Player.h"
 #include "Othellier.h"
+#include <string>
 
 class Game
 {
@@ -9,12 +10,13 @@ class Game
         Game();
         void initiate();
         int jouerTour(int &c);
-        Player getWinner();
+        std::string getWinner();
         int compterPieces(int couleur);
         int scoreupdate();
         Othellier getOthellier();
         virtual ~Game();
-        /*int gameOver();*/
+        int gameOver();
+        Player getPlayer(int);
 
     protected:
 

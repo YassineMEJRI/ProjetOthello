@@ -19,9 +19,10 @@ int Case :: getCouleur ()
     return couleur ;
 }
 
-void Case :: setCouleur (int couleur )
+int Case :: setCouleur (int couleur )
 {
     this->couleur=couleur ;
+    return 1;
 }
 
 int  Case ::getId () const

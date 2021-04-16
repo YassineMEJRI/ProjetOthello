@@ -8,7 +8,7 @@ class Case
         Case(const int i  , int c);
         Case();
         int getCouleur () ;
-        void setCouleur (int couleur );
+        int setCouleur (int couleur );
         int getId () const ;
         static int getCompteurId();
         virtual ~Case();

@@ -70,38 +70,45 @@
 
 1618230008 c:\users\mourad sellami\desktop\othellogame_v0.1\include\case.h
 
-1618402004 source:c:\users\yassi\projects\othello\projetothello\main.cpp
+1618578870 source:c:\users\yassi\projects\othello\projetothello\main.cpp
 	<iostream>
 	"Game.h"
-
-1618401992 c:\users\yassi\projects\othello\projetothello\include\game.h
-	"Player.h"
-	"Othellier.h"
-
-1618406501 c:\users\yassi\projects\othello\projetothello\include\player.h
+	<ctime>
+	<sstream>
+	"common.h"
 	<string>
 
-1618408284 c:\users\yassi\projects\othello\projetothello\include\othellier.h
+1618578870 c:\users\yassi\projects\othello\projetothello\include\game.h
+	"Player.h"
+	"Othellier.h"
+	<string>
+
+1618522472 c:\users\yassi\projects\othello\projetothello\include\player.h
+	<string>
+
+1618514364 c:\users\yassi\projects\othello\projetothello\include\othellier.h
 	"Case.h"
 	<iostream>
 
-1618358312 c:\users\yassi\projects\othello\projetothello\include\case.h
+1618570293 c:\users\yassi\projects\othello\projetothello\include\case.h
 
-1618359791 source:c:\users\yassi\projects\othello\projetothello\src\case.cpp
+1618570245 source:c:\users\yassi\projects\othello\projetothello\src\case.cpp
 	"Case.h"
 
-1618406559 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
-	"Player.h"
+1618522472 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
+	"../include/Player.h"
 	<iostream>
 	<string>
 
-1618427967 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
+1618578870 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
+	"../include/Game.h"
+	<string>
+	"common.h"
+
+1618575190 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
 	"Game.h"
-	<string>
-
-1618427908 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
-	"Othellier.h"
 	<iostream>
+	"common.h"
 
 1618429825 source:c:\users\mariem\desktop\depotlocal\projetothello\main.cpp
 	<iostream>
@@ -135,4 +142,7 @@
 	<iostream>
 
 1618429814 c:\users\mariem\desktop\depotlocal\projetothello\include\case.h
+
+1618569257 c:\users\yassi\projects\othello\projetothello\include\common.h
+	<fstream>
 
