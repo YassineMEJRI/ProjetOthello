@@ -18,6 +18,7 @@ int Othellier::ajouterPion (int posx ,int posy ,int couleur ) /* couleur noir ou
 }
 int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes hor verti diagonale*/
 {
+    log << "in possible moves" << std::endl;
     init(tab);
 
     int tailleTab = 0;
@@ -122,6 +123,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
     }
   //  std::cout << tailleTab << std::endl;
     tailleTab = 0;
+    log << "exeisting possible moves" << std::endl;
     return tab;
 }
 void  Othellier :: printBoard()

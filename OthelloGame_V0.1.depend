@@ -108,7 +108,7 @@
 	"common.h"
 	<windows.h>
 
-1618803262 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
+1618838303 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
 	"Game.h"
 	<iostream>
 	"common.h"
