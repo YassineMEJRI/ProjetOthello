@@ -4,8 +4,6 @@
 
 Player::Player(){
      nbPions = 2;
-     std::cout<< "taper le nom du joueur :"<<std::endl;
-     std::cin>>name;
 }
 
 void Player::setCouleur(int coul){
@@ -14,9 +12,11 @@ void Player::setCouleur(int coul){
 
  std::string Player::getName(){
      return name;
- }
- int Player::getcolor(){
- return color;}
+}
+
+int Player::getcolor(){
+    return color;
+}
 
  int Player::increment_nbPion(int nb){
     nbPions += nb;
@@ -28,5 +28,22 @@ int Player::getNbPions(){
 }
 void Player::setNbPions(int x ){
     nbPions = x; //
+}
+
+void Player::entrerNom(){
+    std::cout<< "taper le nom du joueur :"<<std::endl;
+    std::cin>>name;
+}
+
+void Player::setNom(std::string n){
+    name = n;
+}
+
+int Player::isBot(){
+    return bot;
+}
+
+void Player::setIsBot(int x){
+    bot = x;
 }
  Player::~Player(){}

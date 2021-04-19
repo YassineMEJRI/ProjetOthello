@@ -8,7 +8,7 @@ class Game
 {
     public:
         Game();
-        void initiate();
+        void initiate(int);
         int jouerTour(int &c);
         std::string getWinner();
         int compterPieces(int couleur);
@@ -17,6 +17,7 @@ class Game
         virtual ~Game();
         int gameOver();
         Player getPlayer(int);
+        int startGame();
 
     protected:
 

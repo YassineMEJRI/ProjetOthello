@@ -70,7 +70,7 @@
 
 1618230008 c:\users\mourad sellami\desktop\othellogame_v0.1\include\case.h
 
-1618578870 source:c:\users\yassi\projects\othello\projetothello\main.cpp
+1618798536 source:c:\users\yassi\projects\othello\projetothello\main.cpp
 	<iostream>
 	"Game.h"
 	<ctime>
@@ -78,34 +78,37 @@
 	"common.h"
 	<string>
 
-1618578870 c:\users\yassi\projects\othello\projetothello\include\game.h
+1618798536 c:\users\yassi\projects\othello\projetothello\include\game.h
 	"Player.h"
 	"Othellier.h"
 	<string>
 
-1618522472 c:\users\yassi\projects\othello\projetothello\include\player.h
+1618803155 c:\users\yassi\projects\othello\projetothello\include\player.h
 	<string>
 
-1618514364 c:\users\yassi\projects\othello\projetothello\include\othellier.h
+1618803070 c:\users\yassi\projects\othello\projetothello\include\othellier.h
 	"Case.h"
 	<iostream>
 
-1618570293 c:\users\yassi\projects\othello\projetothello\include\case.h
+1618580511 c:\users\yassi\projects\othello\projetothello\include\case.h
 
-1618570245 source:c:\users\yassi\projects\othello\projetothello\src\case.cpp
+1618580511 source:c:\users\yassi\projects\othello\projetothello\src\case.cpp
 	"Case.h"
 
-1618522472 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
+1618803207 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
 	"../include/Player.h"
 	<iostream>
 	<string>
 
-1618578870 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
+1618804931 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
 	"../include/Game.h"
+	<stdlib.h>
 	<string>
+	<time.h>
 	"common.h"
+	<windows.h>
 
-1618575190 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
+1618803262 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
 	"Game.h"
 	<iostream>
 	"common.h"
@@ -143,6 +146,6 @@
 
 1618429814 c:\users\mariem\desktop\depotlocal\projetothello\include\case.h
 
-1618569257 c:\users\yassi\projects\othello\projetothello\include\common.h
+1618580511 c:\users\yassi\projects\othello\projetothello\include\common.h
 	<fstream>
 

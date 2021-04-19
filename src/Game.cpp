@@ -1,9 +1,37 @@
 #include "../include/Game.h"
+#include <stdlib.h>
 #include <string>
+#include <time.h>
 #include "common.h"
+#include <windows.h>
 int trouverDansTab(int* tab, int x);
 int tabEmpty(int* tab);
+int random(int* tab);
+
 Game::Game(){}
+
+int Game::startGame(){
+        int nb = 2 ;
+        int noPlay = 1; // 1 si joueur percedent a joué
+        do{
+            log << "noplay = " << noPlay << std::endl;
+            if (!(noPlay=this->jouerTour(nb) || noPlay)){
+                break;
+            }
+            log << "nb pions tot " << othellier.getnbPionsTotale() << std::endl;
+        }while(othellier.getnbPionsTotale()<64);
+
+        //afficher gagnant
+        if (this->getWinner().length() == 0)
+            std::cout << "Match Nul" << std::endl;
+        else
+            std::cout << "Le jouer " << this->getWinner() << " a gagné!";
+        std::cout << "Le score final:\n" << players[0].getName() << " : " << players[0].getNbPions() << std::endl;
+        std::cout << players[1].getName() << " : " << players[1].getNbPions() << std::endl;
+
+        return 0;
+}
+
 Game::~Game(){}
 int Game::scoreupdate()
 {
@@ -44,12 +72,22 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
                 return 0;
             }
             else{
-                std::cout<<std::endl;
-                std::cout<<"ajouter la position du pion a jouer  sous la forme ' lettreChiffre '"<<std::endl; // lecture de lentree de joueur
-                std::cin>>a[0]>>a[1]; // 1ere char 2 eme char
-                y = (a[0]-'a'); // conversion du char vers int
-                x = (a[1]-'1');
-                log << a[0] << a[1] << std::endl;
+                    if(players[c%2].isBot()){
+                        //Sleep(500);
+                        int random_move = random(tab);
+                        x = othellier.getXById(random_move);
+                        y = othellier.getYById(random_move);
+                        log << "ordinateur a joué" << x << y << std::endl;
+                        break;
+                    }
+                    else{
+                        std::cout<<std::endl;
+                        std::cout<<"ajouter la position du pion a jouer  sous la forme ' lettreChiffre '"<<std::endl; // lecture de lentree de joueur
+                        std::cin>>a[0]>>a[1]; // 1ere char 2 eme char
+                        y = (a[0]-'a'); // conversion du char vers int
+                        x = (a[1]-'1');
+                        log << a[0] << a[1] << std::endl;
+                    }
             }
            /* std::cout << "id entree  " << othellier.getCase(x,y).getId() << std::endl;*/
         }while(othellier.getCase(x,y).getCouleur()!=-1 || !trouverDansTab(tab, othellier.getCase(x,y).getId()));
@@ -63,8 +101,18 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
         this->scoreupdate();
         return 1;
 }
-void Game::initiate()
+void Game::initiate(int adversaire)
 {
+    players[0].setIsBot(1);
+    players[0].entrerNom();
+    if(adversaire == 2){
+        players[1].setIsBot(1);
+        players[1].setNom("ordinateur");
+    }
+    else{
+        players[1].setIsBot(0);
+        players[1].entrerNom();
+    }
 
     othellier.getCase(3,3).setCouleur(0);
     othellier.getCase(4,4).setCouleur(0);
@@ -111,4 +159,13 @@ int trouverDansTab(int* tab, int x) // cherche x dans tab (x = id choisie)
     }
     log << std::endl;
     return 0;
+}
+
+int random(int* tab){
+    int r = -1;
+    srand(time(NULL));
+    do{
+        r = tab[rand()%64];
+    }while(r == -1);
+    return r;
 }

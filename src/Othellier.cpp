@@ -31,7 +31,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
         { int k=j;
          if (grille[i][j].getCouleur() == couleur )
             {
-            //--------------- horizontal -------------------------------
+            //---------------------- horizontal -------------------------------
              do{k++;}while((grille[i][k].getCouleur() == couleuradd));
              if ((8>k)&&(j+1<k)&&(grille[i][k].getCouleur()==-1)){
                 access = (char)(97+k);
@@ -289,6 +289,25 @@ int Othellier::changerPion(int posx,int posy,int couleur){
             j--;
             }
         }
+}
+
+int Othellier::getXById(int id){
+    for(int i = 0; i<8; i++){
+        for(int j = 0; j<8; j++){
+            if(grille[i][j].getId() == id)
+                return i;
+        }
+    }
+    return -1;
+}
+int Othellier::getYById(int id){
+    for(int i = 0; i<8; i++){
+        for(int j = 0; j<8; j++){
+            if(grille[i][j].getId() == id)
+                return j;
+        }
+    }
+    return -1;
 }
 
 
