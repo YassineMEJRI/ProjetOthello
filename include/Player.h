@@ -25,7 +25,7 @@ class Player
         std::string name;
         int color = 0;
         int nbPions;
-        int bot = 0; //0 si personne 1 si robot
+        int bot = 0; //0 si personne 1 si robot debutant 2 si robot avancé
 };
 
 #endif // PLAYER_H

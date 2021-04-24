@@ -9,7 +9,6 @@ class Othellier
         int ajouterPion (int posx ,int posy ,int couleur ) ;
         Othellier();
        ~Othellier();
-        int incrementer();
         int getnbPionsTotale();
         int* possibleMoves(int);/* 8 direction possibles  haut bas gauche droit les 4 diagonales */
         Othellier getOthellier();
@@ -17,9 +16,11 @@ class Othellier
         int changerPion(int posx,int posy,int couleur);
         int getXById(int);
         int getYById(int);
+        void init();
     private:
         Case grille [8][8] ;
         int nbPionsTotale = 0 ;
+        int tabPossibleMoves[64];//tableau qui contient les jeux possibles a chaque tour
 };
 
 #endif // OTHELLIER_H_INCLUDED

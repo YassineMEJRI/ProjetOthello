@@ -1,4 +1,4 @@
-#include "../include/Game.h"
+#include "Game.h"
 #include <stdlib.h>
 #include <string>
 #include <time.h>
@@ -7,6 +7,7 @@
 int trouverDansTab(int* tab, int x);
 int tabEmpty(int* tab);
 int random(int* tab);
+int calculated_move(int* tab);
 
 Game::Game(){}
 
@@ -16,18 +17,18 @@ int Game::startGame(){
         do{
             log << "noplay = " << noPlay << std::endl;
             if (!noPlay){
-                    if(!(noPlay=this->jouerTour(nb)))
+                    if(!(noPlay=jouerTour(nb)))
                         break;
             }
-            noPlay=this->jouerTour(nb);
+            noPlay=jouerTour(nb);
             log << "nb pions tot " << othellier.getnbPionsTotale() << std::endl;
         }while(othellier.getnbPionsTotale()<64);
 
         //afficher gagnant
-        if (this->getWinner().length() == 0)
+        if (getWinner().length() == 0)
             std::cout << "Match Nul" << std::endl;
         else
-            std::cout << "Le jouer " << this->getWinner() << " a gagné!";
+            std::cout << "Le jouer " << getWinner() << " a gagné!";
         std::cout << "Le score final:\n" << players[0].getName() << " : " << players[0].getNbPions() << std::endl;
         std::cout << players[1].getName() << " : " << players[1].getNbPions() << std::endl;
 
@@ -44,7 +45,7 @@ int Game::scoreupdate()
         for ( int j =0 ; j<8; j++)
         {
             if (othellier.getCase(i,j).getCouleur() == -1 ){ /*rien a faire */}
-            else if (othellier.getCase(i,j).getCouleur() == 0)
+            else if (othellier.getCase(i,j).getCouleur() == players[0].getcolor())
             {
                 players[0].increment_nbPion(1);
             }
@@ -68,6 +69,7 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
             std::cout<<nom<<" play now"<<std::endl;
             log<<nom<<" play now"<<std::endl;
             tab = othellier.possibleMoves(players[c%2].getcolor()); // tableaux des id // possibles moves par rapport les couleurs
+            for(int i =0;i<64;i++){log<<i<<":"<<tab[i]<<" ";}log<<std::endl;
             if(tabEmpty(tab)){
                 std::cout << players[c%2].getName() << " ne peut rien jouer" << std::endl;
                 log << players[c%2].getName() << " ne peut rien jouer" << std::endl;
@@ -76,11 +78,19 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
             }
             else{
                     if(players[c%2].isBot()){
+                        int bot_move;
                         //Sleep(500);
-                        int random_move = random(tab);
-                        x = othellier.getXById(random_move);
-                        y = othellier.getYById(random_move);
-                        log << "ordinateur a joué" << x << y << std::endl;
+                        if(players[c%2].isBot()==1){
+                            bot_move = random(tab);
+                            log << "playing a random move\n";
+                        }
+                        else{
+                            bot_move = calculated_move(tab);
+                            log << "playing a calculated move\n";
+                        }
+                        x = othellier.getXById(bot_move);
+                        y = othellier.getYById(bot_move);
+                        log << players[c%2].getName() << " a joué" << (char)(y+'a')<< x+1 << std::endl;
                         break;
                     }
                     else{
@@ -93,7 +103,7 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
                     }
             }
            /* std::cout << "id entree  " << othellier.getCase(x,y).getId() << std::endl;*/
-        }while(othellier.getCase(x,y).getCouleur()!=-1 || !trouverDansTab(tab, othellier.getCase(x,y).getId()));
+        }while(othellier.getCase(x,y).getCouleur()!=-1 || !tab[othellier.getCase(x,y).getId()]);
      // test  si le choix de la case est convenable  //  trouver dans tab : chercher l id de la case jouee dans tab
         othellier.ajouterPion(x,y,players[c%2].getcolor());
         othellier.changerPion(x,y,players[c%2].getcolor()) ;
@@ -101,15 +111,15 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
 
 
         c++;
-        this->scoreupdate();
+        scoreupdate();
         return 1;
 }
 void Game::initiate(int adversaire)
 {
-    players[0].setIsBot(0);
+    players[0].setIsBot(1);
     players[0].entrerNom();
     if(adversaire == 2){
-        players[1].setIsBot(1);
+        players[1].setIsBot(2);
         players[1].setNom("ordinateur");
     }
     else{
@@ -147,28 +157,51 @@ Othellier Game::getOthellier(){
 }
 
 int tabEmpty(int* tab){
-    if(tab[0] == -1)
-        return 1;
-    return 0;
-}
-int trouverDansTab(int* tab, int x) // cherche x dans tab (x = id choisie)
-{
-    for(int i =0; i < 64; i++){
-        log << " " << tab[i];
-        if(tab[i]== x){
-            log << std::endl;
-            return 1;
-        }
+    for(int i = 0; i < 64; i++){
+        if(tab[i]!=0)
+            return 0;
     }
-    log << std::endl;
-    return 0;
+    return 1;
 }
 
 int random(int* tab){
-    int r = -1;
+    int r = 0;
     srand(time(NULL));
     do{
-        r = tab[rand()%64];
-    }while(r == -1);
+        r = rand()%64;
+    }while(tab[r] == 0);
     return r;
+}
+
+int calculated_move(int* tab){
+    int best=0;
+    if(tab[0])
+        return 0;
+    if(tab[7])
+        return 7;
+    if(tab[63])
+        return 63;
+    if(tab[56])
+        return 56;
+    for(int i = 1; i < 7; i++){
+        if(tab[i])
+            return i;
+    }
+    for(int i = 57; i < 63; i++){
+        if(tab[i])
+            return i;
+    }
+    for(int i = 8; i < 49; i+=8){
+        if(tab[i])
+            return i;
+    }
+    for(int i = 15; i < 63; i+=8){
+        if(tab[i])
+            return i;
+    }
+    for(int i = 0; i < 63; i++){
+        if(tab[i]>tab[best])
+            best = i;
+    }
+    return best;
 }

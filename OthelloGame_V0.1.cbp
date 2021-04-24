@@ -32,7 +32,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add directory="D:/OthelloGame_V0.1/" />
 		</Compiler>
 		<Unit filename="include/Case.h" />
 		<Unit filename="include/Game.h" />
