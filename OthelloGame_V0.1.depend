@@ -86,7 +86,7 @@
 1618803155 c:\users\yassi\projects\othello\projetothello\include\player.h
 	<string>
 
-1618803070 c:\users\yassi\projects\othello\projetothello\include\othellier.h
+1618850620 c:\users\yassi\projects\othello\projetothello\include\othellier.h
 	"Case.h"
 	<iostream>
 
@@ -100,7 +100,7 @@
 	<iostream>
 	<string>
 
-1618804931 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
+1618850735 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
 	"../include/Game.h"
 	<stdlib.h>
 	<string>
@@ -108,7 +108,7 @@
 	"common.h"
 	<windows.h>
 
-1618838303 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
+1618851394 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
 	"Game.h"
 	<iostream>
 	"common.h"

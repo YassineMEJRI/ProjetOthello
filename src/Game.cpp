@@ -15,9 +15,11 @@ int Game::startGame(){
         int noPlay = 1; // 1 si joueur percedent a joué
         do{
             log << "noplay = " << noPlay << std::endl;
-            if (!(noPlay=this->jouerTour(nb) || noPlay)){
-                break;
+            if (!noPlay){
+                    if(!(noPlay=this->jouerTour(nb)))
+                        break;
             }
+            noPlay=this->jouerTour(nb);
             log << "nb pions tot " << othellier.getnbPionsTotale() << std::endl;
         }while(othellier.getnbPionsTotale()<64);
 
@@ -65,9 +67,10 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
             std::string nom = players[c%2].getName();
             std::cout<<nom<<" play now"<<std::endl;
             log<<nom<<" play now"<<std::endl;
-            tab = othellier.Possiblemoves(players[c%2].getcolor()); // tableaux des id // possibles moves par rapport les couleurs
+            tab = othellier.possibleMoves(players[c%2].getcolor()); // tableaux des id // possibles moves par rapport les couleurs
             if(tabEmpty(tab)){
                 std::cout << players[c%2].getName() << " ne peut rien jouer" << std::endl;
+                log << players[c%2].getName() << " ne peut rien jouer" << std::endl;
                 c++;
                 return 0;
             }
@@ -103,7 +106,7 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
 }
 void Game::initiate(int adversaire)
 {
-    players[0].setIsBot(1);
+    players[0].setIsBot(0);
     players[0].entrerNom();
     if(adversaire == 2){
         players[1].setIsBot(1);

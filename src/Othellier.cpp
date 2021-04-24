@@ -16,7 +16,7 @@ int Othellier::ajouterPion (int posx ,int posy ,int couleur ) /* couleur noir ou
     }
     return 0;
 }
-int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes hor verti diagonale*/
+int* Othellier::possibleMoves(int couleur) /* tester les cases possibles (lignes hor verti diagonale*/
 {
     log << "in possible moves" << std::endl;
     init(tab);
@@ -27,13 +27,12 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
     std::string access="";
     int couleuradd = 1;
     if (couleur == 1 ) {couleuradd = 0;}
-    for( int i = 0 ; i<8 ;i++)
-    {for (int j = 0; j<8;j++)
-        { int k=j;
-         if (grille[i][j].getCouleur() == couleur )
-            {
+    for( int i = 0 ; i<8 ;i++){
+        for (int j = 0; j<8;j++){
+            int k=j;
+            if (grille[i][j].getCouleur() == couleur ){
             //---------------------- horizontal -------------------------------
-             do{k++;}while((grille[i][k].getCouleur() == couleuradd));
+             do{k++;}while((8>k)&&(grille[i][k].getCouleur() == couleuradd));
              if ((8>k)&&(j+1<k)&&(grille[i][k].getCouleur()==-1)){
                 access = (char)(97+k);
                 std::cout <<" | " << access <<","<< i+1;
@@ -44,7 +43,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
                     tailleTab++;
                 }
              k = j;
-             do{k--;}while((grille[i][k].getCouleur() == couleuradd));
+             do{k--;}while((0<=k)&&(grille[i][k].getCouleur() == couleuradd));
              if ((j-1>k)&&(grille[i][k].getCouleur()==-1)&&(0<=k)){
                 access = (char)(97+k);
                 std::cout <<" | " << access <<","<< i+1;
@@ -55,7 +54,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
 
             //--------------- vertical verification --------------------
                 k=i;
-             do{k++;}while((grille[k][j].getCouleur() == couleuradd));
+             do{k++;}while((8>k)&&(grille[k][j].getCouleur() == couleuradd));
              if ((8>k)&&(i+1<k)&&(grille[k][j].getCouleur()==-1)){
                 access = (char)(97+j);
              std :: cout <<" | " << access <<","<< k+1;
@@ -63,7 +62,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
              tailleTab++;
              }
             k=i;
-             do{k--;}while((grille[k][j].getCouleur() == couleuradd));
+             do{k--;}while((0<=k)&&(grille[k][j].getCouleur() == couleuradd));
              if ((0<=k)&&(i-1>k)&&(grille[k][j].getCouleur()==-1)){
                 access = (char)(97+j);
              std ::cout <<" | " << access <<","<< k+1;
@@ -75,7 +74,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
             //--------------- verification diagonal sup --------------------
              k=i;
              int k1 = j;
-             do{k++; k1 ++; }while((grille[k][k1].getCouleur() == couleuradd));
+             do{k++; k1 ++; }while((8>k1)&&(8>k)&&(grille[k][k1].getCouleur() == couleuradd));
              if ((8>k1)&&(8>k)&&(j+1<k1)&&(i+1<k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
@@ -87,7 +86,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
 
              k=i;
              k1 = j;
-             do{k--; k1 --; }while((grille[k][k1].getCouleur() == couleuradd));
+             do{k--; k1 --; }while((0<=k1)&&(0<=k)&&(grille[k][k1].getCouleur() == couleuradd));
              if ((0<=k1)&&(0<=k)&&(j-1>k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
@@ -98,7 +97,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
 
              k=i;
              k1 = j;
-             do{k++; k1 --; }while((grille[k][k1].getCouleur() == couleuradd));
+             do{k++; k1 --; }while((0<=k1)&&(8>k)&&(grille[k][k1].getCouleur() == couleuradd));
              if ((0<=k1)&&(8>k)&&(j-1>k1)&&(i+1<k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
@@ -109,7 +108,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
 
              k=i;
              k1 = j;
-             do{k--; k1 ++; }while((grille[k][k1].getCouleur() == couleuradd));
+             do{k--; k1 ++; }while((0<=k)&&(8>k1)&&(grille[k][k1].getCouleur() == couleuradd));
              if ((0<=k)&&(8>k1)&&(j-1>k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
@@ -123,7 +122,7 @@ int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes
     }
   //  std::cout << tailleTab << std::endl;
     tailleTab = 0;
-    log << "exeisting possible moves" << std::endl;
+    log << "exiting possible moves" << std::endl;
     return tab;
 }
 void  Othellier :: printBoard()
