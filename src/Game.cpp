@@ -4,6 +4,8 @@
 #include <time.h>
 #include "common.h"
 #include <windows.h>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 int trouverDansTab(int* tab, int x);
 int tabEmpty(int* tab);
 int random(int* tab);
@@ -114,9 +116,8 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
         scoreupdate();
         return 1;
 }
-void Game::initiate(int adversaire)
-{
-    players[0].setIsBot(1);
+void Game::initiate(int adversaire){
+    players[0].setIsBot(0);
     players[0].entrerNom();
     if(adversaire == 2){
         players[1].setIsBot(2);
@@ -127,10 +128,10 @@ void Game::initiate(int adversaire)
         players[1].entrerNom();
     }
 
-    othellier.getCase(3,3).setCouleur(0);
-    othellier.getCase(4,4).setCouleur(0);
-    othellier.getCase(3,4).setCouleur(1);
-    othellier.getCase(4,3).setCouleur(1);
+    othellier.getCase(3,3).setCouleur(1);
+    othellier.getCase(4,4).setCouleur(1);
+    othellier.getCase(3,4).setCouleur(0);
+    othellier.getCase(4,3).setCouleur(0);
     players[0].setCouleur(1);
     players[1].setCouleur(0); //randomize
 
@@ -145,12 +146,22 @@ std::string Game::getWinner(){
         else
             return "";
 }
+Player Game::getPlayerWinner(){
+    if(players[0].getNbPions() > players[1].getNbPions())
+            return players[0];
+    else if(players[0].getNbPions() < players[1].getNbPions())
+            return players[1];
+    else{
+        Player draw;
+        draw.setNom("Match Nul!");
+        draw.setNbPions(players[0].getNbPions());
+    }
+
+}
 
 Player Game::getPlayer(int x){
     return players[x];
 }
-
-
 
 Othellier Game::getOthellier(){
     return othellier;
@@ -204,4 +215,191 @@ int calculated_move(int* tab){
             best = i;
     }
     return best;
+}
+
+sf::Vector2i posInitiale(127, 119);
+void Game::GUI(){
+
+
+    sf::RenderWindow window(sf::VideoMode(1000, 700), "Othello", sf::Style::Close|sf::Style::Titlebar);
+    window.setFramerateLimit(30);
+    window.setPosition(sf::Vector2i(sf::VideoMode::getDesktopMode().width/2-500,0));
+
+    //cursor joueur blanc
+    sf::Image cursor1;
+    cursor1.loadFromFile("cursorblanc.png");
+    const uint8_t * pixels1 = cursor1.getPixelsPtr();
+    sf::Cursor c1;
+    c1.loadFromPixels(pixels1, sf::Vector2u(55,56),sf::Vector2u(27.5,28));
+
+    //cursor joueur blanc
+    sf::Image cursor2;
+    cursor2.loadFromFile("cursornoir.png");
+    const uint8_t * pixels2 = cursor2.getPixelsPtr();
+    sf::Cursor c2;
+    c2.loadFromPixels(pixels2, sf::Vector2u(55,56),sf::Vector2u(27.5,28));
+
+
+    sf::Texture imgOth;
+    imgOth.loadFromFile("othellier2.png");
+    imgOth.setSmooth(true);
+    sf::Sprite bgOth(imgOth);
+
+    sf::Texture imgPionB;
+    imgPionB.loadFromFile("pionblanc.png");
+    imgPionB.setSmooth(true);
+    pionB.setTexture(imgPionB);
+
+    sf::Texture imgPionN;
+    imgPionN.loadFromFile("pionnoir.png");
+    imgPionN.setSmooth(true);
+    pionN.setTexture(imgPionN);
+
+    sf::Font font;
+    font.loadFromFile("AvenirLTStd-Black.otf");
+
+    sf::Text score0(std::to_string(players[0].getNbPions()), font);
+    score0.setCharacterSize(30);
+    score0.setFillColor(sf::Color::White);
+    score0.setOrigin(15,15);
+    score0.setPosition(770+15,230+15);
+
+    sf::Text score1(std::to_string(players[1].getNbPions()), font);
+    score1.setCharacterSize(30);
+    score1.setFillColor(sf::Color::White);
+    score1.setOrigin(15,15);
+    score1.setPosition(770+15,338+15);
+
+    sf::Text nomJ1(players[0].getName(), font);
+    nomJ1.setCharacterSize(30);
+    nomJ1.setFillColor(sf::Color::White);
+    nomJ1.setPosition(875,245-15);
+
+    sf::Text nomJ2(players[1].getName(), font);
+    nomJ2.setCharacterSize(30);
+    nomJ2.setFillColor(sf::Color::White);
+    nomJ2.setPosition(875,353-15);
+
+    sf::Sprite pions[8][8];
+    int tour = 2;
+    window.setMouseCursor(c1);
+
+    int *tab;
+    tab = othellier.possibleMoves(players[tour%2].getcolor());
+    bool gameOn = true;
+    int gameContinues = 2;
+    while (window.isOpen())
+    {
+            for(int i=0; i<8; i++){
+                for(int j=0; j<8; j++){
+                    if(othellier.getCase(i,j).getCouleur()==0)
+                        pions[j][i]=pionB;
+                    else if(othellier.getCase(i,j).getCouleur()==1)
+                        pions[j][i]=pionN;
+                    else if(tab[i*8+j]!=0){
+                        pions[j][i]=pionN;
+                        pions[j][i].setColor(sf::Color(255, 255, 255, 90));
+                    }
+                    else
+                        pions[j][i].setColor(sf::Color(0, 0, 0, 0));
+                    pions[j][i].setPosition(posInitiale.x+69*j,posInitiale.y+69*i);
+                }
+        }
+        if(players[tour%2].isBot()){
+            int bot_move;
+                //Sleep(500);
+                if(players[tour%2].isBot()==1)
+                    bot_move = random(tab);
+                else
+                    bot_move = calculated_move(tab);
+                int x = othellier.getXById(bot_move);
+                int y = othellier.getYById(bot_move);
+                /*othellier.ajouterPion(x,y,players[tour%2].getcolor());
+                othellier.changerPion(x,y,players[tour%2].getcolor()) ;
+                tour++;
+                gameContinues = 2;
+                tab = othellier.possibleMoves(players[tour%2].getcolor());
+                scoreupdate();*/
+                jouerTourGUI(y,x,tour,tab,gameContinues);
+
+        }
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                window.close();
+            if (event.type == sf::Event::MouseButtonPressed)
+                if(event.key.code==sf::Mouse::Left){
+                        if(gameOn==true){
+                            sf::Vector2i pos = sf::Mouse::getPosition(window);
+                            int i = pos.x;
+                            int j = pos.y;
+                            if(i>127&&i<127+69*8&&j>118&&j<118+69*8){
+                                i = (pos.x-127)/69;
+                                j = (pos.y-118)/69;
+                                gameOn = jouerTourGUI(i,j, tour, tab, gameContinues);
+                            }
+                        }
+                }
+        }
+
+        // clear the window with black color
+        window.clear();
+
+        if(othellier.getnbPionsTotale()>=64)
+            gameOn = false;
+        if(gameOn){
+            if(tour%2)
+                window.setMouseCursor(c1);
+            else
+                window.setMouseCursor(c2);
+
+            window.draw(bgOth);
+
+            for(int i=0; i<8;i++)
+                for(int j=0; j<8; j++)
+                    window.draw(pions[i][j]);
+
+            score0.setString(std::to_string(players[0].getNbPions()));
+            window.draw(score0);
+            score1.setString(std::to_string(players[1].getNbPions()));
+            window.draw(score1);
+
+            window.draw(nomJ1);
+            window.draw(nomJ2);
+        }
+        else{
+            sf::Text gameover("Game Over " + getPlayerWinner().getName() + " " + std::to_string(getPlayerWinner().getNbPions()), font);
+            gameover.setCharacterSize(30);
+            gameover.setStyle(sf::Text::Bold);
+            gameover.setFillColor(sf::Color::White);
+            gameover.setPosition(500,350);
+            window.draw(gameover);
+        }
+
+        window.display();
+    }
+}
+
+bool Game::jouerTourGUI(int i, int j, int &tour,int* tab, int &gameContinues){
+    if(tabEmpty(tab)){
+        tour++;
+        gameContinues--;
+    }
+    othellier.printBoard();
+    if(tab[j*8+i]!=0){
+            /*if(tour%2)
+                pions[i][j]=pionB;
+            else
+                pions[i][j]=pionN;*/
+            //pions[i][j].setPosition(posInitiale.x+69*i,posInitiale.y+69*j);
+            othellier.ajouterPion(j,i,players[tour%2].getcolor());
+            othellier.changerPion(j,i,players[tour%2].getcolor()) ;
+            tour++;
+            gameContinues = 2;
+            tab = othellier.possibleMoves(players[tour%2].getcolor());
+            scoreupdate();
+    }
+    return gameContinues;
 }

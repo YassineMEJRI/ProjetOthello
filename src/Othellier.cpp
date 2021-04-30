@@ -98,7 +98,7 @@ int* Othellier::possibleMoves(int couleur) /* tester les cases possibles (lignes
              k=i;
              k1 = j;
              do{k--; k1 ++; }while((0<=k)&&(8>k1)&&(grille[k][k1].getCouleur() == couleuradd));
-             if ((0<=k)&&(8>k1)&&(j-1>k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
+             if ((0<=k)&&(8>k1)&&(j+1<k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
                 tabPossibleMoves[grille[k][k1].getId()] += i-k-1;

@@ -11,7 +11,6 @@ class Othellier
        ~Othellier();
         int getnbPionsTotale();
         int* possibleMoves(int);/* 8 direction possibles  haut bas gauche droit les 4 diagonales */
-        Othellier getOthellier();
         Case& getCase(int, int);
         int changerPion(int posx,int posy,int couleur);
         int getXById(int);
