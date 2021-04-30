@@ -1,8 +1,6 @@
 #include "Game.h"
 #include <iostream>
 #include "common.h"
-void init(int*);
-int tab[64]; //tableau qui contient les jeux possibles a chaque tour
 Othellier::Othellier(){
         nbPionsTotale = 4 ;
 }
@@ -16,113 +14,103 @@ int Othellier::ajouterPion (int posx ,int posy ,int couleur ) /* couleur noir ou
     }
     return 0;
 }
-int* Othellier::Possiblemoves(int couleur) /* tester les cases possibles (lignes hor verti diagonale*/
+int* Othellier::possibleMoves(int couleur) /* tester les cases possibles (lignes hor verti diagonale*/
 {
-    init(tab);
-
-    int tailleTab = 0;
+    log << "in possible moves" << std::endl;
+    init();
     // black test
     std::cout<<couleur<<std::endl;
     std::string access="";
     int couleuradd = 1;
     if (couleur == 1 ) {couleuradd = 0;}
-    for( int i = 0 ; i<8 ;i++)
-    {for (int j = 0; j<8;j++)
-        { int k=j;
-         if (grille[i][j].getCouleur() == couleur )
-            {
-            //--------------- horizontal -------------------------------
-             do{k++;}while((grille[i][k].getCouleur() == couleuradd));
+    for( int i = 0 ; i<8 ;i++){
+        for (int j = 0; j<8;j++){
+            int k=j;
+            if (grille[i][j].getCouleur() == couleur ){
+            //---------------------- horizontal -------------------------------
+             do{k++;}while((8>k)&&(grille[i][k].getCouleur() == couleuradd));
              if ((8>k)&&(j+1<k)&&(grille[i][k].getCouleur()==-1)){
                 access = (char)(97+k);
                 std::cout <<" | " << access <<","<< i+1;
-                //ajout du jeu au tableau
-                    tab[tailleTab] = grille[i][access[0]-'a'].getId();
-                  /*  std::cout << tab[tailleTab] <<std::endl;*/
+                //ajout du jeu au tabPossibleMovesleau
+                    tabPossibleMoves[grille[i][k].getId()] += k-j-1;
+                  /*  std::cout << tabPossibleMoves[tailleTab] <<std::endl;*/
                   //  std::cout << i+1 << " " << access[0]-'a'<<std::endl;;
-                    tailleTab++;
                 }
              k = j;
-             do{k--;}while((grille[i][k].getCouleur() == couleuradd));
+             do{k--;}while((0<=k)&&(grille[i][k].getCouleur() == couleuradd));
              if ((j-1>k)&&(grille[i][k].getCouleur()==-1)&&(0<=k)){
                 access = (char)(97+k);
                 std::cout <<" | " << access <<","<< i+1;
-                tab[tailleTab] = grille[i][access[0]-'a'].getId();
-              //  std::cout << tab[tailleTab] <<std::endl;
-                tailleTab++;
+                tabPossibleMoves[grille[i][k].getId()] += j-k-1;
+              //  std::cout << tabPossibleMoves[tailleTab] <<std::endl;
                 }
 
             //--------------- vertical verification --------------------
                 k=i;
-             do{k++;}while((grille[k][j].getCouleur() == couleuradd));
+             do{k++;}while((8>k)&&(grille[k][j].getCouleur() == couleuradd));
              if ((8>k)&&(i+1<k)&&(grille[k][j].getCouleur()==-1)){
                 access = (char)(97+j);
              std :: cout <<" | " << access <<","<< k+1;
-             tab[tailleTab] = grille[k][access[0]-'a'].getId();
-             tailleTab++;
+             tabPossibleMoves[grille[k][j].getId()] += k-i-1;
              }
             k=i;
-             do{k--;}while((grille[k][j].getCouleur() == couleuradd));
+             do{k--;}while((0<=k)&&(grille[k][j].getCouleur() == couleuradd));
              if ((0<=k)&&(i-1>k)&&(grille[k][j].getCouleur()==-1)){
                 access = (char)(97+j);
              std ::cout <<" | " << access <<","<< k+1;
-             tab[tailleTab] = grille[k][access[0]-'a'].getId();
-             tailleTab++;
+             tabPossibleMoves[grille[k][j].getId()] += i-k-1;
              }
 
 
             //--------------- verification diagonal sup --------------------
              k=i;
              int k1 = j;
-             do{k++; k1 ++; }while((grille[k][k1].getCouleur() == couleuradd));
+             do{k++; k1 ++; }while((8>k1)&&(8>k)&&(grille[k][k1].getCouleur() == couleuradd));
              if ((8>k1)&&(8>k)&&(j+1<k1)&&(i+1<k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
-                tab[tailleTab] = grille[k][access[0]-'a'].getId();
+                tabPossibleMoves[grille[k][k1].getId()] += k-i-1;
                // std::cout << tab[tailleTab] <<std::endl;
-                tailleTab++;
                 }
 
 
              k=i;
              k1 = j;
-             do{k--; k1 --; }while((grille[k][k1].getCouleur() == couleuradd));
+             do{k--; k1 --; }while((0<=k1)&&(0<=k)&&(grille[k][k1].getCouleur() == couleuradd));
              if ((0<=k1)&&(0<=k)&&(j-1>k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
-                tab[tailleTab] = grille[k][access[0]-'a'].getId();
-                // std::cout << tab[tailleTab] <<std::endl;
-                tailleTab++;
+                tabPossibleMoves[grille[k][k1].getId()] += i-k-1;
+                // std::cout << tabPossibleMoves[tailleTab] <<std::endl;
                 }
 
              k=i;
              k1 = j;
-             do{k++; k1 --; }while((grille[k][k1].getCouleur() == couleuradd));
+             do{k++; k1 --; }while((0<=k1)&&(8>k)&&(grille[k][k1].getCouleur() == couleuradd));
              if ((0<=k1)&&(8>k)&&(j-1>k1)&&(i+1<k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
-                tab[tailleTab] = grille[k][access[0]-'a'].getId();
-                //std::cout << tab[tailleTab] <<std::endl;
-                tailleTab++;
+                tabPossibleMoves[grille[k][k1].getId()] += k-i-1;
+                //std::cout << tabPossibleMoves[tailleTab] <<std::endl;
                 }
 
              k=i;
              k1 = j;
-             do{k--; k1 ++; }while((grille[k][k1].getCouleur() == couleuradd));
-             if ((0<=k)&&(8>k1)&&(j-1>k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
+             do{k--; k1 ++; }while((0<=k)&&(8>k1)&&(grille[k][k1].getCouleur() == couleuradd));
+             if ((0<=k)&&(8>k1)&&(j+1<k1)&&(i-1>k)&&(grille[k][k1].getCouleur() == -1)){
                 access = (char)(97+k1);
                 std::cout <<" | " << access <<","<< k+1;
-                tab[tailleTab] = grille[k][access[0]-'a'].getId();
-               // std::cout << tab[tailleTab] <<std::endl;
-                tailleTab++;
+                tabPossibleMoves[grille[k][k1].getId()] += i-k-1;
+               // std::cout << tabPossibleMoves[tailleTab] <<std::endl;
                 }
 
         }
     }
     }
   //  std::cout << tailleTab << std::endl;
-    tailleTab = 0;
-    return tab;
+    log << "exiting possible moves" << std::endl;
+    return tabPossibleMoves;
 }
 void  Othellier :: printBoard()
 {
@@ -141,7 +129,7 @@ void  Othellier :: printBoard()
                 log << " |" ;
                 if (grille[i][j].getCouleur() == -1 ){
                         std::cout << "  " ;
-                       log << "  " ;
+                       log << grille[i][j].getId() ;
                 }
                 else if (grille[i][j].getCouleur() == 0){
                         std::cout << " b" ;
@@ -162,9 +150,7 @@ Othellier::~Othellier()
 {
     //dtor
 }
-int Othellier::incrementer(){
- return this->nbPionsTotale++;
-}
+
 int Othellier::getnbPionsTotale(){
 return this->nbPionsTotale;}
 
@@ -291,11 +277,30 @@ int Othellier::changerPion(int posx,int posy,int couleur){
         }
 }
 
+int Othellier::getXById(int id){
+    for(int i = 0; i<8; i++){
+        for(int j = 0; j<8; j++){
+            if(grille[i][j].getId() == id)
+                return i;
+        }
+    }
+    return -1;
+}
+int Othellier::getYById(int id){
+    for(int i = 0; i<8; i++){
+        for(int j = 0; j<8; j++){
+            if(grille[i][j].getId() == id)
+                return j;
+        }
+    }
+    return -1;
+}
 
 
 
-void init(int* tab)
+
+void Othellier::init()
 {
     for(int i = 0; i < 64 ; i++)
-        tab[i] = -1;
+        tabPossibleMoves[i] = 0;
 }
