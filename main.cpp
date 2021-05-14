@@ -29,7 +29,7 @@ int main()
     string c="";
     Game k;
     k.initiate(adversaire);
-    k.GUI();
+    k.startGame();
 
     return 0;
 }

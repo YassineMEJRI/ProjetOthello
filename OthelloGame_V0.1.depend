@@ -70,7 +70,7 @@
 
 1618230008 c:\users\mourad sellami\desktop\othellogame_v0.1\include\case.h
 
-1619797497 source:c:\users\yassi\projects\othello\projetothello\main.cpp
+1621028157 source:c:\users\yassi\projects\othello\projetothello\main.cpp
 	<iostream>
 	"Game.h"
 	<ctime>
@@ -79,16 +79,16 @@
 	<string>
 	<SFML/Graphics.hpp>
 
-1619795938 c:\users\yassi\projects\othello\projetothello\include\game.h
+1621004198 c:\users\yassi\projects\othello\projetothello\include\game.h
 	"Player.h"
 	"Othellier.h"
 	<string>
 	<SFML/Graphics.hpp>
 
-1619579725 c:\users\yassi\projects\othello\projetothello\include\player.h
+1619798461 c:\users\yassi\projects\othello\projetothello\include\player.h
 	<string>
 
-1619774032 c:\users\yassi\projects\othello\projetothello\include\othellier.h
+1619798461 c:\users\yassi\projects\othello\projetothello\include\othellier.h
 	"Case.h"
 	<iostream>
 
@@ -97,12 +97,12 @@
 1618580511 source:c:\users\yassi\projects\othello\projetothello\src\case.cpp
 	"Case.h"
 
-1618803207 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
+1619798461 source:c:\users\yassi\projects\othello\projetothello\src\player.cpp
 	"../include/Player.h"
 	<iostream>
 	<string>
 
-1619797455 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
+1621028164 source:c:\users\yassi\projects\othello\projetothello\src\game.cpp
 	"Game.h"
 	<stdlib.h>
 	<string>
@@ -112,7 +112,7 @@
 	<SFML/Graphics.hpp>
 	<SFML/Window.hpp>
 
-1619782699 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
+1621030934 source:c:\users\yassi\projects\othello\projetothello\src\othellier.cpp
 	"Game.h"
 	<iostream>
 	"common.h"
@@ -561,4 +561,11 @@
 	<SFML/Graphics/PrimitiveType.hpp>
 	<SFML/Graphics/Drawable.hpp>
 	<SFML/Window/GlResource.hpp>
+
+1621007649 source:c:\users\yassi\projects\othello\projetothello\src\menu.cpp
+	"Menu.h"
+	<SFML/Graphics.hpp>
+
+1621008530 c:\users\yassi\projects\othello\projetothello\include\menu.h
+	<SFML/Graphics.hpp>
 
