@@ -121,7 +121,7 @@ void Game::initiate(int adversaire){
     players[0].entrerNom();
     if(adversaire == 2){
         players[1].setIsBot(2);
-        players[1].setNom("ordinateur");
+        players[1].setNom("CPU");
     }
     else{
         players[1].setIsBot(0);
@@ -262,23 +262,23 @@ void Game::GUI(){
     score0.setCharacterSize(30);
     score0.setFillColor(sf::Color::White);
     score0.setOrigin(15,15);
-    score0.setPosition(770+15,230+15);
+    score0.setPosition(770+15,338+15);
 
     sf::Text score1(std::to_string(players[1].getNbPions()), font);
     score1.setCharacterSize(30);
     score1.setFillColor(sf::Color::White);
     score1.setOrigin(15,15);
-    score1.setPosition(770+15,338+15);
+    score1.setPosition(770+15,230+15);
 
-    sf::Text nomJ1(players[0].getName(), font);
+    sf::Text nomJ0(players[0].getName(), font);
+    nomJ0.setCharacterSize(30);
+    nomJ0.setFillColor(sf::Color::White);
+    nomJ0.setPosition(875,353-15);
+
+    sf::Text nomJ1(players[1].getName(), font);
     nomJ1.setCharacterSize(30);
     nomJ1.setFillColor(sf::Color::White);
     nomJ1.setPosition(875,245-15);
-
-    sf::Text nomJ2(players[1].getName(), font);
-    nomJ2.setCharacterSize(30);
-    nomJ2.setFillColor(sf::Color::White);
-    nomJ2.setPosition(875,353-15);
 
     sf::Sprite pions[8][8];
     int tour = 2;
@@ -314,12 +314,7 @@ void Game::GUI(){
                     bot_move = calculated_move(tab);
                 int x = othellier.getXById(bot_move);
                 int y = othellier.getYById(bot_move);
-                /*othellier.ajouterPion(x,y,players[tour%2].getcolor());
-                othellier.changerPion(x,y,players[tour%2].getcolor()) ;
-                tour++;
-                gameContinues = 2;
-                tab = othellier.possibleMoves(players[tour%2].getcolor());
-                scoreupdate();*/
+
                 jouerTourGUI(y,x,tour,tab,gameContinues);
 
         }
@@ -366,8 +361,8 @@ void Game::GUI(){
             score1.setString(std::to_string(players[1].getNbPions()));
             window.draw(score1);
 
+            window.draw(nomJ0);
             window.draw(nomJ1);
-            window.draw(nomJ2);
         }
         else{
             sf::Text gameover("Game Over " + getPlayerWinner().getName() + " " + std::to_string(getPlayerWinner().getNbPions()), font);
@@ -380,6 +375,7 @@ void Game::GUI(){
 
         window.display();
     }
+
 }
 
 bool Game::jouerTourGUI(int i, int j, int &tour,int* tab, int &gameContinues){

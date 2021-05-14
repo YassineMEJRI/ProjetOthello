@@ -19,8 +19,6 @@ int main()
     ss << now;
     log.open(ss.str()+".txt");
 
-
-    int a,b;
     cout << "Jouer contre:\n1.un ami\n2.Contre l'ordinateur" << endl;
     int adversaire;
     do{

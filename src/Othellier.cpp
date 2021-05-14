@@ -217,10 +217,10 @@ int Othellier::changerPion(int posx,int posy,int couleur){
      do{
             i--;
             j--;
-        }while((grille[i][j].getCouleur()==couleuradd) && (i >= 0 )&& (j >= 0 ));
+        }while((grille[i][j].getCouleur()==couleuradd) && (i > 0 )&& (j > 0 ));
         if (grille[i][j].getCouleur() == couleur)
         {
-            while ( (i<=posx)&&(j<=posy)){
+            while ( (i<posx)&&(j<posy)){
             grille[i][j].setCouleur(couleur);
             log << "in diag flipped " << j << i << std::endl;
             i++;
