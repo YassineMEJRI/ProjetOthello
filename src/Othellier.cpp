@@ -167,7 +167,7 @@ int Othellier::changerPion(int posx,int posy,int couleur){
     int i = posx;
      do{
             i++;
-     }while((grille[i][posy].getCouleur()==couleuradd )&&(i<8));
+     }while((grille[i][posy].getCouleur()==couleuradd )&&(i<7));
         if (grille[i][posy].getCouleur() == couleur)
         {
             for (int j=posx+1;j<i;j++){
@@ -179,7 +179,7 @@ int Othellier::changerPion(int posx,int posy,int couleur){
      i = posx;
      do{
             i--;
-     }while((grille[i][posy].getCouleur()==couleuradd) && (i >= 0 ));
+     }while((grille[i][posy].getCouleur()==couleuradd) && (i > 0 ));
         if (grille[i][posy].getCouleur() == couleur)
         {
             for (int j=posx-1;j>i;j--){
@@ -191,7 +191,7 @@ int Othellier::changerPion(int posx,int posy,int couleur){
      i = posy;
      do{
             i++;
-     }while((grille[posx][i].getCouleur()==couleuradd) && (i < 8 ));
+     }while((grille[posx][i].getCouleur()==couleuradd) && (i < 7 ));
         if (grille[posx][i].getCouleur() == couleur)
         {
             for (int j=posy+1;j<i;j++){
@@ -203,8 +203,8 @@ int Othellier::changerPion(int posx,int posy,int couleur){
      i = posy;
      do{
             i--;
-     }while((grille[posx][i].getCouleur()==couleuradd) && (i >= 0 ));
-        if (grille[posx][i].getCouleur() == couleur)
+     }while((grille[posx][i].getCouleur()==couleuradd) && (i > 0 ));
+        if (grille[posx][i].getCouleur() == couleur )
         {
             for (int j=posy-1;j>i;j--){
                     grille[posx][j].setCouleur(couleur);
@@ -233,7 +233,7 @@ int Othellier::changerPion(int posx,int posy,int couleur){
      do{
             i--;
             j++;
-        }while((grille[i][j].getCouleur()==couleuradd) && (i >= 0 )&& (j < 8 ));
+        }while((grille[i][j].getCouleur()==couleuradd) && (i > 0 )&& (j < 7 ));
         if (grille[i][j].getCouleur() == couleur)
         {
             while ( (i<=posx)&&(j>=posy)){
@@ -249,7 +249,7 @@ int Othellier::changerPion(int posx,int posy,int couleur){
      do{
             i++;
             j--;
-        }while((grille[i][j].getCouleur()==couleuradd) && (j >= 0 )&& (i < 8 ));
+        }while((grille[i][j].getCouleur()==couleuradd) && (j > 0 )&& (i < 7 ));
         if (grille[i][j].getCouleur() == couleur)
         {
             while ( (i>=posx)&&(j<=posy)){
@@ -265,7 +265,7 @@ int Othellier::changerPion(int posx,int posy,int couleur){
      do{
             i++;
             j++;
-        }while((grille[i][j].getCouleur()==couleuradd) && (i < 8 )&& (j < 8 ));
+        }while((grille[i][j].getCouleur()==couleuradd) && (i < 7 )&& (j < 7 ));
         if (grille[i][j].getCouleur() == couleur)
         {
             while ( (i>=posx)&&(j>=posy)){
