@@ -382,6 +382,8 @@ bool Game::jouerTourGUI(int i, int j, int &tour,int* tab, int &gameContinues){
     if(tabEmpty(tab)){
         tour++;
         gameContinues--;
+        tab = othellier.possibleMoves(players[tour%2].getcolor());
+        return gameContinues;
     }
     othellier.printBoard();
     if(tab[j*8+i]!=0){
