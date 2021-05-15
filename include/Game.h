@@ -22,6 +22,7 @@ class Game
         int startGame();
         void GUI();
         bool jouerTourGUI(int,int,int &tour,int *,int&);
+        void randomizeFirstPlayer();
         sf::Sprite pionB;
         sf::Sprite pionN;
 

@@ -38,6 +38,7 @@ int Game::startGame(){
 }
 
 Game::~Game(){}
+
 int Game::scoreupdate()
 {
   players[0].setNbPions( 0); // set 0 et compter le nbr de pions de chaque joueur dans la grille .
@@ -117,19 +118,20 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
         return 1;
 }
 void Game::initiate(int adversaire){
-    players[0].setIsBot(0);
+    players[0].setIsBot(2);
     players[0].entrerNom();
     if(adversaire == 1){
         players[1].setIsBot(1);
-        players[1].setNom("CPU");
+        players[1].setNom("CPU1");
     }else if(adversaire == 2){
         players[1].setIsBot(2);
-        players[1].setNom("CPU");
+        players[1].setNom("CPU2");
     }
     else if(adversaire == 0){
         players[1].setIsBot(0);
         players[1].entrerNom();
     }
+    randomizeFirstPlayer();
 
     othellier.getCase(3,3).setCouleur(1);
     othellier.getCase(4,4).setCouleur(1);
@@ -149,6 +151,7 @@ std::string Game::getWinner(){
         else
             return "";
 }
+
 Player Game::getPlayerWinner(){
     if(players[0].getNbPions() > players[1].getNbPions())
             return players[0];
@@ -292,7 +295,6 @@ void Game::GUI(){
 
     int *tab;
     tab = othellier.possibleMoves(players[tour%2].getcolor());
-    bool gameOn = true;
     int gameContinues = 2;
     while (window.isOpen())
     {
@@ -311,7 +313,8 @@ void Game::GUI(){
                     pions[j][i].setPosition(posInitiale.x+69*j,posInitiale.y+69*i);
                 }
         }
-        if(players[tour%2].isBot()){
+        if(players[tour%2].isBot()&&gameContinues>0){
+                //Sleep(500);
             int bot_move;
                 //Sleep(500);
                 if(players[tour%2].isBot()==1)
@@ -320,8 +323,8 @@ void Game::GUI(){
                     bot_move = calculated_move(tab);
                 int x = othellier.getXById(bot_move);
                 int y = othellier.getYById(bot_move);
-
-                jouerTourGUI(y,x,tour,tab,gameContinues);
+                log<<"gamecontinues= " <<gameContinues<<"\n";
+                gameContinues = jouerTourGUI(y,x,tour,tab,gameContinues);
 
         }
         sf::Event event;
@@ -332,14 +335,14 @@ void Game::GUI(){
                 window.close();
             if (event.type == sf::Event::MouseButtonPressed)
                 if(event.key.code==sf::Mouse::Left){
-                        if(gameOn==true){
+                        if(gameContinues>0){
                             sf::Vector2i pos = sf::Mouse::getPosition(window);
                             int i = pos.x;
                             int j = pos.y;
                             if(i>127&&i<127+69*8&&j>118&&j<118+69*8){
                                 i = (pos.x-127)/69;
                                 j = (pos.y-118)/69;
-                                gameOn = jouerTourGUI(i,j, tour, tab, gameContinues);
+                                gameContinues = jouerTourGUI(i,j, tour, tab, gameContinues);
                             }
                         }
                 }
@@ -352,9 +355,9 @@ void Game::GUI(){
         int mousey = pos.y;
 
         if(othellier.getnbPionsTotale()>=64)
-            gameOn = false;
+            gameContinues =0;
 
-        if(gameOn){
+        if(gameContinues>0){
             if(mousex>127&&mousex<127+69*8&&mousey>118&&mousey<118+69*8){
             if(tour%2)
                 window.setMouseCursor(c1);
@@ -394,14 +397,13 @@ void Game::GUI(){
 }
 
 bool Game::jouerTourGUI(int i, int j, int &tour,int* tab, int &gameContinues){
+    othellier.printBoard();
     if(tabEmpty(tab)){
         tour++;
         gameContinues--;
         tab = othellier.possibleMoves(players[tour%2].getcolor());
         return gameContinues;
-    }
-    othellier.printBoard();
-    if(tab[j*8+i]!=0){
+    }else if(tab[j*8+i]!=0){
             /*if(tour%2)
                 pions[i][j]=pionB;
             else
@@ -415,4 +417,14 @@ bool Game::jouerTourGUI(int i, int j, int &tour,int* tab, int &gameContinues){
             scoreupdate();
     }
     return gameContinues;
+}
+
+void Game::randomizeFirstPlayer(){
+    srand (time(NULL));
+    int r = rand() % 2;
+    if(r==0){
+        Player tmp = players[0];
+        players[0] = players[1];
+        players[1] = tmp;
+    }
 }

@@ -19,13 +19,13 @@ int main()
     stringstream ss;
     ss << now;
     log.open("logs/"+ss.str()+".txt");
-
+    /*
     LeaderBoard l;
-    /*l.addScore("yassine",100);
+    l.addScore("yassine",100);
     l.addScore("mariem",120);
     l.addScore("mourad", 50);
     l.addScore("yassine", 100);
-    l.writeListeToFile();*/
+    l.writeListeToFile();
     //l.writeListeToFile();
 
     l.readListeFromFile();
@@ -34,19 +34,19 @@ int main()
     l.getSortedByScore();
 
     //randomize who plays first
+*/
 
-/*
-    cout << "Jouer contre:\n1.un ami\n2.Contre l'ordinateur" << endl;
+    cout << "Jouer contre:\n0.un ami\n1.CPU1\n2.CPU2" << endl;
     int adversaire;
     do{
         cin >> adversaire;
-    }while(adversaire != 1 && adversaire !=2);
+    }while(adversaire<0&&adversaire>2);
 
     system("CLS");
     string c="";
     Game k;
     k.initiate(adversaire);
-    k.GUI();*/
+    k.GUI();
 
     return 0;
 }
