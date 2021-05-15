@@ -4,6 +4,7 @@
 #include "Othellier.h"
 #include <string>
 #include <SFML/Graphics.hpp>
+#include "LeaderBoard.h"
 
 class Game
 {
@@ -23,6 +24,7 @@ class Game
         void GUI();
         bool jouerTourGUI(int,int,int &tour,int *,int&);
         void randomizeFirstPlayer();
+        LeaderBoard leaderBoard;
         sf::Sprite pionB;
         sf::Sprite pionN;
 

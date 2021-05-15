@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "LeaderBoard.h"
 int trouverDansTab(int* tab, int x);
 int tabEmpty(int* tab);
 int random(int* tab);
@@ -118,7 +119,7 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
         return 1;
 }
 void Game::initiate(int adversaire){
-    players[0].setIsBot(2);
+    players[0].setIsBot(0);
     players[0].entrerNom();
     if(adversaire == 1){
         players[1].setIsBot(1);
@@ -295,6 +296,7 @@ void Game::GUI(){
 
     int *tab;
     tab = othellier.possibleMoves(players[tour%2].getcolor());
+    bool gameOn = true;
     int gameContinues = 2;
     while (window.isOpen())
     {
@@ -306,14 +308,14 @@ void Game::GUI(){
                         pions[j][i]=pionN;
                     else if(tab[i*8+j]!=0){
                         pions[j][i]=pionN;
-                        pions[j][i].setColor(sf::Color(255, 255, 255, 90));
+                        pions[j][i].setColor(sf::Color(255, 255, 255, 50));
                     }
                     else
                         pions[j][i].setColor(sf::Color(0, 0, 0, 0));
                     pions[j][i].setPosition(posInitiale.x+69*j,posInitiale.y+69*i);
                 }
         }
-        if(players[tour%2].isBot()&&gameContinues>0){
+        if(players[tour%2].isBot()&&gameOn){
                 //Sleep(500);
             int bot_move;
                 //Sleep(500);
@@ -324,7 +326,7 @@ void Game::GUI(){
                 int x = othellier.getXById(bot_move);
                 int y = othellier.getYById(bot_move);
                 log<<"gamecontinues= " <<gameContinues<<"\n";
-                gameContinues = jouerTourGUI(y,x,tour,tab,gameContinues);
+                jouerTourGUI(y,x,tour,tab,gameContinues);
 
         }
         sf::Event event;
@@ -334,15 +336,15 @@ void Game::GUI(){
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::MouseButtonPressed)
-                if(event.key.code==sf::Mouse::Left){
-                        if(gameContinues>0){
+                if(event.key.code==sf::Mouse::Left&&gameOn){
+                        if(gameOn==true){
                             sf::Vector2i pos = sf::Mouse::getPosition(window);
                             int i = pos.x;
                             int j = pos.y;
                             if(i>127&&i<127+69*8&&j>118&&j<118+69*8){
                                 i = (pos.x-127)/69;
                                 j = (pos.y-118)/69;
-                                gameContinues = jouerTourGUI(i,j, tour, tab, gameContinues);
+                                gameOn = jouerTourGUI(i,j, tour, tab, gameContinues);
                             }
                         }
                 }
@@ -355,9 +357,9 @@ void Game::GUI(){
         int mousey = pos.y;
 
         if(othellier.getnbPionsTotale()>=64)
-            gameContinues =0;
+            gameOn = false;
 
-        if(gameContinues>0){
+        if(gameOn){
             if(mousex>127&&mousex<127+69*8&&mousey>118&&mousey<118+69*8){
             if(tour%2)
                 window.setMouseCursor(c1);
@@ -388,10 +390,18 @@ void Game::GUI(){
             gameover.setStyle(sf::Text::Bold);
             gameover.setFillColor(sf::Color::White);
             gameover.setPosition(500,350);
+
             window.draw(gameover);
         }
 
         window.display();
+    }
+    if(!gameOn){
+        leaderBoard.readListeFromFile();
+        leaderBoard.addScore(getPlayerWinner().getName(),getPlayerWinner().getNbPions()*10);
+        leaderBoard.writeListeToFile();
+        leaderBoard.getSortedByScore();
+
     }
 
 }
@@ -402,7 +412,9 @@ bool Game::jouerTourGUI(int i, int j, int &tour,int* tab, int &gameContinues){
         tour++;
         gameContinues--;
         tab = othellier.possibleMoves(players[tour%2].getcolor());
-        return gameContinues;
+        if(gameContinues<1)
+            return false;
+        return true;
     }else if(tab[j*8+i]!=0){
             /*if(tour%2)
                 pions[i][j]=pionB;
@@ -416,7 +428,7 @@ bool Game::jouerTourGUI(int i, int j, int &tour,int* tab, int &gameContinues){
             tab = othellier.possibleMoves(players[tour%2].getcolor());
             scoreupdate();
     }
-    return gameContinues;
+    return true;
 }
 
 void Game::randomizeFirstPlayer(){
