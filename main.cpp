@@ -5,6 +5,7 @@
 #include "common.h"
 #include <string>
 #include <SFML/Graphics.hpp>
+#include "LeaderBoard.h"
 
 using namespace std;
 //log file
@@ -18,7 +19,15 @@ int main()
     stringstream ss;
     ss << now;
     log.open(ss.str()+".txt");
+    LeaderBoard l;
+    l.readListeFromFile();
+    l.affiche();
+    l.addScore("yassine", 100);
+    l.writeListeToFile();
+    l.readListeFromFile();
+    l.affiche();
 
+/*
     cout << "Jouer contre:\n1.un ami\n2.Contre l'ordinateur" << endl;
     int adversaire;
     do{
@@ -29,7 +38,7 @@ int main()
     string c="";
     Game k;
     k.initiate(adversaire);
-    k.startGame();
+    k.GUI();*/
 
     return 0;
 }

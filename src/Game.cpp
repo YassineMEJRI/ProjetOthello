@@ -119,11 +119,14 @@ int Game::jouerTour(int &c) // nb  ddesigne  le tour de role de chaque joueur  *
 void Game::initiate(int adversaire){
     players[0].setIsBot(0);
     players[0].entrerNom();
-    if(adversaire == 2){
+    if(adversaire == 1){
+        players[1].setIsBot(1);
+        players[1].setNom("CPU");
+    }else if(adversaire == 2){
         players[1].setIsBot(2);
         players[1].setNom("CPU");
     }
-    else{
+    else if(adversaire == 0){
         players[1].setIsBot(0);
         players[1].entrerNom();
     }
@@ -239,6 +242,9 @@ void Game::GUI(){
     sf::Cursor c2;
     c2.loadFromPixels(pixels2, sf::Vector2u(55,56),sf::Vector2u(27.5,28));
 
+    sf::Cursor syscursor;
+    syscursor.loadFromSystem(sf::Cursor::Arrow);
+
 
     sf::Texture imgOth;
     imgOth.loadFromFile("othellier2.png");
@@ -341,14 +347,23 @@ void Game::GUI(){
 
         // clear the window with black color
         window.clear();
+        sf::Vector2i pos = sf::Mouse::getPosition(window);
+        int mousex = pos.x;
+        int mousey = pos.y;
 
         if(othellier.getnbPionsTotale()>=64)
             gameOn = false;
+
         if(gameOn){
+            if(mousex>127&&mousex<127+69*8&&mousey>118&&mousey<118+69*8){
             if(tour%2)
                 window.setMouseCursor(c1);
             else
                 window.setMouseCursor(c2);
+            }else
+            window.setMouseCursor(syscursor);
+
+
 
             window.draw(bgOth);
 
