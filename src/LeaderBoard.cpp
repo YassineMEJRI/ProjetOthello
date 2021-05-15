@@ -32,16 +32,30 @@ void LeaderBoard::writeListeToFile(){
 
 void LeaderBoard::readListeFromFile(){
     std::string sl;
-    std::stringstream ligne;
+    //std::stringstream ligne;
     std::string nom;
     int score;
     fichierScores.open("scores.txt", std::ios::in);
     while(getline(fichierScores, sl)){
+        std::stringstream ligne;
         ligne << sl;
         ligne >> nom >> score;
         liste[nom]=score;
     }
     fichierScores.close();
+}
+
+std::multimap<int,std::string,std::greater<int>> LeaderBoard::getSortedByScore(){
+    std::map<std::string,int>::iterator it;
+    std::multimap<int,std::string,std::greater<int>> sorted;
+    for(it = liste.begin(); it!= liste.end(); it++){
+        sorted.insert(std::pair<int,std::string>(it->second,it->first));
+    }
+    std::multimap<int,std::string,std::greater<int>>::iterator it2;
+    for(it2 =sorted.begin(); it2 != sorted.end(); it2++){
+        std::cout<< it2->first << "\t" << it2->second << "\n";
+    }
+    return sorted;
 }
 
 void LeaderBoard::affiche(){

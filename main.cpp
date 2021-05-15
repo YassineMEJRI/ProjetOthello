@@ -18,14 +18,22 @@ int main()
     //log file
     stringstream ss;
     ss << now;
-    log.open(ss.str()+".txt");
+    log.open("logs/"+ss.str()+".txt");
+
     LeaderBoard l;
-    l.readListeFromFile();
-    l.affiche();
+    /*l.addScore("yassine",100);
+    l.addScore("mariem",120);
+    l.addScore("mourad", 50);
     l.addScore("yassine", 100);
-    l.writeListeToFile();
+    l.writeListeToFile();*/
+    //l.writeListeToFile();
+
     l.readListeFromFile();
+    l.addScore("mourad", 300);
     l.affiche();
+    l.getSortedByScore();
+
+    //randomize who plays first
 
 /*
     cout << "Jouer contre:\n1.un ami\n2.Contre l'ordinateur" << endl;
