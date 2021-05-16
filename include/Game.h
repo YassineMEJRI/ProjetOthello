@@ -5,6 +5,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "LeaderBoard.h"
+#include "GUI.h"
 
 class Game
 {
@@ -21,18 +22,21 @@ class Game
         int gameOver();
         Player getPlayer(int);
         int startGame();
-        void GUI();
+        void playGUI(sf::RenderWindow &);
         bool jouerTourGUI(int,int,int &tour,int *,int&);
         void randomizeFirstPlayer();
-        LeaderBoard leaderBoard;
+        int startGameGUI();
+
         sf::Sprite pionB;
         sf::Sprite pionN;
 
     protected:
 
     private:
+        GUI gui;
         Othellier othellier;
         Player players[2];
+        LeaderBoard leaderBoard;
 };
 
 #endif // GAME_H

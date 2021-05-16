@@ -36,17 +36,18 @@ int main()
     //randomize who plays first
 */
 
-    cout << "Jouer contre:\n0.un ami\n1.CPU1\n2.CPU2" << endl;
+    /*cout << "Jouer contre:\n0.un ami\n1.CPU1\n2.CPU2" << endl;
     int adversaire;
     do{
         cin >> adversaire;
     }while(adversaire<0&&adversaire>2);
 
     system("CLS");
-    string c="";
-    Game k;
-    k.initiate(adversaire);
-    k.GUI();
+    string c="";*/
+
+    Game g;
+    //k.initiate(adversaire);
+    g.startGameGUI();
 
     return 0;
 }
