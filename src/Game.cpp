@@ -25,7 +25,8 @@ Game::Game() {}
 int Game::startGameGUI(){
     std::string nom1,nom2;
     int adversaire;
-    sf::RenderWindow &window = gui.DebutJeu(nom1,nom2,adversaire);
+    sf::RenderWindow &window = gui.GraphicDebutJeu(nom1,nom2,adversaire);
+    //sf::RenderWindow &window = gui.DebutJeu(nom1,nom2,adversaire);
     players[0].setNom(nom1);
     players[1].setNom(nom2);
     initiate(adversaire);//adversaire 0 Friend 1 CPU1 2 CPU2
@@ -138,7 +139,7 @@ void Game::initiate(int adversaire) {
   } else if (adversaire == 2) {
     players[1].setIsBot(2);
     players[1].setNom("CPU2");
-  } else if (adversaire == 0) {
+  } else if (adversaire == 3) {
     players[1].setIsBot(0);
     //players[1].entrerNom();
   }

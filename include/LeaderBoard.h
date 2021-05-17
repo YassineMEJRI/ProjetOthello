@@ -15,6 +15,7 @@ class LeaderBoard
         void readListeFromFile();
         void affiche();
         std::multimap<int,std::string,std::greater<int>> getSortedByScore();
+        std::string getStringSortedByScore();
         virtual ~LeaderBoard();
 
     protected:

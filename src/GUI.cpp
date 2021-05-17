@@ -2,6 +2,8 @@
 
 #include "iostream"
 
+#include "LeaderBoard.h"
+
 //#include <SFML/Audio.hpp>
 
 //sf::Music musique;
@@ -14,7 +16,10 @@ sf::Texture SoundIconOff;
 sf::Texture MusicIconOn;
 sf::Texture MusicIconOff;
 int difficulty = 1;
+int adv = 0;//=1 si VS FRIEND 0 sinon
 int initialement = 0;
+std::string nameJ1, nameJ2;
+bool startgame=false;
  GUI::GUI(){
     window.create(sf::VideoMode(1000, 700), "Othello", sf::Style::Close | sf::Style::Titlebar);
     window.setFramerateLimit(30);
@@ -25,7 +30,7 @@ int initialement = 0;
     const uint8_t * iconBlock = icon.getPixelsPtr();
     window.setIcon(50, 49, iconBlock);
  }
-sf::RenderWindow & GUI::DebutJeu(std::string & nom1, std::string & nom2, int &adversaire) {
+/*sf::RenderWindow & GUI::DebutJeu(std::string & nom1, std::string & nom2, int &adversaire) {
 
 
   int statue = GraphicDebutJeu();
@@ -48,8 +53,8 @@ sf::RenderWindow & GUI::DebutJeu(std::string & nom1, std::string & nom2, int &ad
         DebutJeu(nom1,nom2, adversaire);
       InitialiseJeu(statue, nom1, nom2);
     } while (statue == 5);
-    /*players[0].setNom(name[0]);
-    players[1].setNom(name[1]);*/
+    //players[0].setNom(name[0]);
+    //players[1].setNom(name[1]);
     //initiate(statue,name[0],name[1]);
     std::cout << "baaed l'initialise";
     //GUI(window);
@@ -62,8 +67,8 @@ sf::RenderWindow & GUI::DebutJeu(std::string & nom1, std::string & nom2, int &ad
     scorewindow();
     DebutJeu(nom1, nom2, adversaire);
   }
-}
-int GUI::GraphicDebutJeu() {
+}*/
+sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int& adversaire) {
   if (initial == 0) {
     //musique.openFromFile("music.ogg");
     //sound.setVolume(30);
@@ -124,6 +129,15 @@ int GUI::GraphicDebutJeu() {
   sf::Sprite BackgroundSupport(Background);
   bool mouseIn = false;
   while (window.isOpen()) {
+
+        if(startgame){
+                if(adv==1)
+                    adversaire = 3;
+                else
+                    adversaire = difficulty;
+                nom1=nameJ1;nom2=nameJ2;
+
+        return window;}
     //musique.getLoop();
     window.draw(BackgroundSupport);
     sf::Event event;
@@ -172,13 +186,14 @@ int GUI::GraphicDebutJeu() {
       if (event.type == sf::Event::MouseButtonPressed) {
         if (event.key.code == sf::Mouse::Left) {
           if (MouseX > 374 && MouseX < 634 && MouseY > 163 && MouseY < 266) {
-                //choicegame();
-            return 1; //PLAY
+                choicegame();
+            //return 1; //PLAY
           } else if (MouseX > 374 && MouseX < 634 && MouseY > 316 && MouseY < 419) {
-              //settingswindow();
-            return 10; //SETTINGS
+              settingswindow();
+            //return 10; //SETTINGS
           } else if (MouseX > 374 && MouseX < 634 && MouseY > 454 && MouseY < 557) {
-            return 20; //SCORE
+              scorewindow();
+            //return 20; //SCORE
           }
         }
 
@@ -207,6 +222,7 @@ int GUI::GraphicDebutJeu() {
     }
     if (!(MouseX > 374 && MouseX < 634 && MouseY > 163 && MouseY < 266) && !(MouseX > 374 && MouseX < 634 && MouseY > 316 && MouseY < 419) && !(MouseX > 374 && MouseX < 634 && MouseY > 454 && MouseY < 557)) mouseIn = false;
     std::cout << mouseIn << std::endl;
+    if(!startgame){
     window.draw(ButtonPlay);
     window.draw(playText);
     window.draw(ButtonSettings);
@@ -214,6 +230,7 @@ int GUI::GraphicDebutJeu() {
     window.draw(ButtonScore);
     window.draw(ScoreText);
     window.display();
+    }
   }
 }
 int GUI::choicegame() {
@@ -247,6 +264,8 @@ int GUI::choicegame() {
   SoundIconButton.setPosition(25, 630);
   bool mouseIn = false;
   while (window.isOpen()) {
+        if(startgame)
+            return 0;
     //sound.getLoop();
     //musique.getLoop();
     window.draw(bgOth);
@@ -283,13 +302,18 @@ int GUI::choicegame() {
       if (event.type == sf::Event::MouseButtonPressed)
         if (event.key.code == sf::Mouse::Left) {
           if (i > 291 && i < 291 + 430 && j > 217 && j < 217 + 175) {
-            return 2; //VS CPU
+                adv = 0;
+                InitialiseJeu(2);
+            //return 2; //VS CPU
           }
           if (i > 291 && i < 291 + 430 && j > 427 && j < 427 + 175) {
-            return 1; //VS FRIEND
+                adv=1;
+              InitialiseJeu(1);
+            //return 1; //VS FRIEND
           }
           if (i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51) {
-            return 5; //retour
+              return 0;
+            //return 5; //retour
           }
           if (i > 25 && i < 75 && j > 570 && j < 620)
             if (initialSetMusic == 0) {
@@ -340,14 +364,15 @@ int GUI::choicegame() {
         }
     }
     if (!(i > 291 && i < 291 + 430 && j > 217 && j < 217 + 175) && !(i > 291 && i < 291 + 430 && j > 427 && j < 427 + 175) && !(i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51)) mouseIn = false;
-
+    if(!startgame){
     window.draw(BackButton);
     window.draw(MusicIconButton);
     window.draw(SoundIconButton);
     window.display();
+    }
   }
 }
-int GUI::InitialiseJeu(int adversaire, std::string & nameJ1, std::string & nameJ2) {
+int GUI::InitialiseJeu(int adversaire) {
   sf::Texture AddName;
   AddName.loadFromFile("img/gameBegin/AddNamePlayer.png");
   AddName.setSmooth(true);
@@ -472,6 +497,7 @@ int GUI::InitialiseJeu(int adversaire, std::string & nameJ1, std::string & nameJ
                 playerInput.erase(playerInput.getSize() - 1);
                 nameJ1 = playerInput;
                 nameJ2 = "ordinateur";
+                startgame = true;
                 return difficulty;
               } else {
                 error.setPosition(430, 540);
@@ -491,6 +517,7 @@ int GUI::InitialiseJeu(int adversaire, std::string & nameJ1, std::string & nameJ
                 playerInput.erase(playerInput.getSize() - 1);
                 nameJ1 = playerInput;
                 nameJ2 = "ordinateur";
+                startgame = true;
                 return difficulty;
               } else {
                 error.setPosition(430, 540);
@@ -799,7 +826,7 @@ int GUI::settingswindow() {
         if (event.key.code == sf::Mouse::Left) {
           if (i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51) {
               std::cout << "clicked retour\t"<<difficulty<<std::endl;
-              GraphicDebutJeu();
+              return 0;
                 //return 1;
                 }
           if (i > 449 && i < 449 + 236 && j > 508 && j < 508 + 71)
@@ -851,6 +878,11 @@ int GUI::scorewindow() {
   sf::Text scoreList;
   scoreList.setFont(font2);
   scoreList.setCharacterSize(30);
+
+ // LeaderBoard l;
+ // l.readListeFromFile();
+
+
   scoreList.setString("1. Mourad .................  60\n2. moncef .................  56\n3. mariem .................  52\n4. yassine .................  50\n5. Menyar .................  48\n6. wided  ................... 40");
   scoreList.setPosition(300, 270);
   sf::Texture Background;
@@ -891,7 +923,9 @@ int GUI::scorewindow() {
       //--------------------------- Pressed Event -------------------------------------
       if (event.type == sf::Event::MouseButtonPressed)
         if (event.key.code == sf::Mouse::Left) {
-          if (i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51) return 1;
+          if (i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51)
+          return 0;
+            //return 1;
           if (i > 25 && i < 75 && j > 570 && j < 620)
             if (initialSetMusic == 0) {
               MusicIconButton.setTexture(MusicIconOff);

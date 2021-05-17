@@ -62,6 +62,23 @@ std::multimap < int, std::string, std::greater < int >> LeaderBoard::getSortedBy
   return sorted;
 }
 
+std::string LeaderBoard::getStringSortedByScore(){
+  std::map < std::string, int > ::iterator it;
+  std::multimap < int, std::string, std::greater < int >> sorted;
+  char* sortedstring;
+
+  for (it = liste.begin(); it != liste.end(); it++) {
+    sorted.insert(std::pair < int, std::string > (it -> second, it -> first));
+  }
+
+  std::multimap < int, std::string, std::greater < int >> ::iterator it2;
+  for (it2 = sorted.begin(); it2 != sorted.end(); it2++) {
+    std::cout << it2 -> first << "\t" << it2 -> second << "\n";
+    sprintf(sortedstring,"%20s%d\n",it2 -> first,it2 -> second);
+  }
+  return sortedstring;
+}
+
 void LeaderBoard::affiche() {
   std::map < std::string, int > ::iterator it;
   for (it = liste.begin(); it != liste.end(); it++) {

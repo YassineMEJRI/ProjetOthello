@@ -7,9 +7,9 @@ class GUI {
     public:
         GUI();
         ~GUI();
-        int GraphicDebutJeu();
+        sf::RenderWindow & GraphicDebutJeu(std::string &nom1, std::string &nom2, int& adversaire);
         int choicegame();
-        int InitialiseJeu(int adversaire, std::string & nameJ1, std::string & nameJ2);
+        int InitialiseJeu(int adversaire);
         int settingswindow();
         int scorewindow();
         sf::RenderWindow& DebutJeu(std::string &nom1, std::string &nom2, int& adversaire);
