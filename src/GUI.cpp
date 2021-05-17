@@ -874,16 +874,16 @@ int GUI::settingswindow() {
 int GUI::scorewindow() {
   sf::Texture backto;
   sf::Font font2;
-  font2.loadFromFile("square_721_bt.ttf");
+  font2.loadFromFile("consolaz.ttf");
   sf::Text scoreList;
   scoreList.setFont(font2);
   scoreList.setCharacterSize(30);
 
- // LeaderBoard l;
- // l.readListeFromFile();
+  LeaderBoard l;
+  l.readListeFromFile();
 
 
-  scoreList.setString("1. Mourad .................  60\n2. moncef .................  56\n3. mariem .................  52\n4. yassine .................  50\n5. Menyar .................  48\n6. wided  ................... 40");
+  scoreList.setString(l.getStringSortedByScore());
   scoreList.setPosition(300, 270);
   sf::Texture Background;
   Background.loadFromFile("img/score/background.png");

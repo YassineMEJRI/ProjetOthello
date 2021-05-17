@@ -48,6 +48,18 @@ int main()
     Game g;
     //k.initiate(adversaire);
     g.startGameGUI();
+    /*LeaderBoard l;
+    l.readListeFromFile();
+    cout << l.getStringSortedByScore();*/
+    /*
+    string h("heeee");
+    cout << h;
+    printf("%s", h.c_str());
 
+    char s[200];
+    sprintf(s,"%-20s%d",h,20);
+    string sds(s);
+    cout << s;
+    */
     return 0;
 }
