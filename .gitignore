@@ -5,3 +5,5 @@ bin/*
 *.layout
 *.o
 *.cbp
+*.dll
+*.exe

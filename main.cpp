@@ -6,6 +6,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "LeaderBoard.h"
+#include <SFML/Main.hpp>
 
 using namespace std;
 //log file

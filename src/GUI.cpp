@@ -4,9 +4,9 @@
 
 #include "LeaderBoard.h"
 
-//#include <SFML/Audio.hpp>
+#include <SFML/Audio.hpp>
 
-//sf::Music musique;
+//sf::Music //musique;
 //sf::Music sound;
 sf::Sprite MusicIconButton;
 sf::Sprite SoundIconButton;
@@ -76,7 +76,7 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
     //musique.play();
     initial++;
   }
-  std::cout << initial;
+  //std::cout << initial;
   sf::Texture Background;
   Background.loadFromFile("img/play/BackGround.png");
 
@@ -102,17 +102,17 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
   ButtonPlay.setPosition(374, 174);
   ButtonPlay.setTexture(ButtonNC);
   playText.setPosition(440, 181);
-  playText.setString("play");
+  playText.setString("Play");
   //------------------------------------
   ButtonSettings.setPosition(374, 316);
   ButtonSettings.setTexture(ButtonNC);
   settingsText.setPosition(400, 332);
-  settingsText.setString("settings");
+  settingsText.setString("Settings");
   //-----------------------------------
   ButtonScore.setPosition(374, 458);
   ButtonScore.setTexture(ButtonNC);
   ScoreText.setPosition(408, 462);
-  ScoreText.setString("score");
+  ScoreText.setString("Score");
   //-----------------------------------
   playText.setFont(font2);
   playText.setCharacterSize(65);
@@ -128,6 +128,7 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
   //-----------------------------------
   sf::Sprite BackgroundSupport(Background);
   bool mouseIn = false;
+  startgame = false;
   while (window.isOpen()) {
 
         if(startgame){
@@ -137,7 +138,8 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
                     adversaire = difficulty;
                 nom1=nameJ1;nom2=nameJ2;
 
-        return window;}
+        return window;
+        }
     //musique.getLoop();
     window.draw(BackgroundSupport);
     sf::Event event;
@@ -161,18 +163,24 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
         }
         //-------------------Settings Bouton ------------------------------
         if (MouseX > 374 && MouseX < 634 && MouseY > 316 && MouseY < 419) {
-          // if(initialSetSound==0&&!mouseIn){sound.play();mouseIn=true;}
+           if(initialSetSound==0&&!mouseIn){
+                //sound.play();
+                mouseIn=true;
+           }
           ButtonSettings.setPosition(374, 312);
           ButtonSettings.setTexture(ButtonC);
           settingsText.setPosition(400, 328);
-        } else { //mouseIn=false;
+        } else { mouseIn=false;
           ButtonSettings.setPosition(374, 316);
           ButtonSettings.setTexture(ButtonNC);
           settingsText.setPosition(400, 332);
         }
         //---------------------score bouton ----------------------------------
         if (MouseX > 374 && MouseX < 634 && MouseY > 454 && MouseY < 557) {
-          //  if(initialSetSound==0&&!mouseIn){sound.play();mouseIn=true;}
+            if(initialSetSound==0&&!mouseIn){
+                    //sound.play();
+                    mouseIn=true;
+            }
           ButtonScore.setPosition(374, 454);
           ButtonScore.setTexture(ButtonC);
           ScoreText.setPosition(408, 458);
@@ -221,7 +229,7 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
         }
     }
     if (!(MouseX > 374 && MouseX < 634 && MouseY > 163 && MouseY < 266) && !(MouseX > 374 && MouseX < 634 && MouseY > 316 && MouseY < 419) && !(MouseX > 374 && MouseX < 634 && MouseY > 454 && MouseY < 557)) mouseIn = false;
-    std::cout << mouseIn << std::endl;
+    //std::cout << mouseIn << std::endl;
     if(!startgame){
     window.draw(ButtonPlay);
     window.draw(playText);
@@ -477,7 +485,8 @@ int GUI::InitialiseJeu(int adversaire) {
         if (boolean) {
           playerText.setString(playerInput);
           if (event.type == sf::Event::TextEntered) {
-            if ((event.text.unicode > 64) && (event.text.unicode < 91) || (event.text.unicode > 96) && (event.text.unicode < 123)) {
+            if ((event.text.unicode > 64) && (event.text.unicode < 91) || (event.text.unicode > 96) && (event.text.unicode < 123))
+                {
               if (playerInput.getSize() < 9) {
                 if (playerInput.getSize() != 0) {
                   playerInput.erase(playerInput.getSize() - 1);
@@ -604,7 +613,8 @@ int GUI::InitialiseJeu(int adversaire) {
           if (!boolean)
             if (j > 461 && j < 461 + 67 && i > 144 && i < 144 + 323) {
               boolean = true;
-              if (bol == 0) playerInput += "_";
+              if (bol == 0)
+                playerInput += "_";
               bol = 1;
             } else {
               boolean = false;
@@ -631,7 +641,8 @@ int GUI::InitialiseJeu(int adversaire) {
         if (boolean == true) {
           playerText.setString(playerInput);
           if (event.type == sf::Event::TextEntered) {
-            if ((event.text.unicode > 64) && (event.text.unicode < 91) || (event.text.unicode > 96) && (event.text.unicode < 123)) {
+            if ((event.text.unicode > 64) && (event.text.unicode < 91) || (event.text.unicode > 96) && (event.text.unicode < 123))
+                {
               if (playerInput.getSize() < 9) {
                 if (playerInput.getSize() != 0) {
                   playerInput.erase(playerInput.getSize() - 1);
@@ -673,6 +684,7 @@ int GUI::InitialiseJeu(int adversaire) {
             if ((playerInput1.getSize() != 0) && (playerInput.getSize() != 0)) {
               nameJ1 = playerInput1;
               nameJ2 = playerInput;
+              startgame = true;
               return 1;
             } else {
               error.setPosition(430, 540);
@@ -700,6 +712,7 @@ int GUI::InitialiseJeu(int adversaire) {
               if ((playerInput1.getSize() != 0) && (playerInput.getSize() != 0)) {
                 nameJ1 = playerInput1;
                 nameJ2 = playerInput;
+                startgame = true;
                 return 1;
               } else {
                 error.setPosition(430, 540);
@@ -825,7 +838,7 @@ int GUI::settingswindow() {
       if (event.type == sf::Event::MouseButtonPressed) {
         if (event.key.code == sf::Mouse::Left) {
           if (i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51) {
-              std::cout << "clicked retour\t"<<difficulty<<std::endl;
+              //std::cout << "clicked retour\t"<<difficulty<<std::endl;
               return 0;
                 //return 1;
                 }

@@ -10,12 +10,14 @@ class Othellier
         Othellier();
        ~Othellier();
         int getnbPionsTotale();
-        int* possibleMoves(int);/* 8 direction possibles  haut bas gauche droit les 4 diagonales */
+        void setnbPionsTotale(int);
+        int possibleMoves(int);/* 8 direction possibles  haut bas gauche droit les 4 diagonales */
         Case& getCase(int, int);
         int changerPion(int posx,int posy,int couleur);
         int getXById(int);
         int getYById(int);
         void init();
+        int* getPossibleMoves();
     private:
         Case grille [8][8] ;
         int nbPionsTotale = 0 ;

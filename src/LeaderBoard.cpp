@@ -59,7 +59,7 @@ std::multimap < int, std::string, std::greater < int >> LeaderBoard::getSortedBy
   }
   std::multimap < int, std::string, std::greater < int >> ::iterator it2;
   for (it2 = sorted.begin(); it2 != sorted.end(); it2++) {
-    std::cout << it2 -> first << "\t" << it2 -> second << "\n";
+    //std::cout << it2 -> first << "\t" << it2 -> second << "\n";
   }
   return sorted;
 }
@@ -74,12 +74,13 @@ std::string LeaderBoard::getStringSortedByScore(){
   }
 
   std::multimap < int, std::string, std::greater < int >> ::iterator it2;
-
-  for (it2 = sorted.begin(); it2 != sorted.end(); it2++) {
+    int nb = 0;
+  for (it2 = sorted.begin(); it2 != sorted.end()&&nb<8; it2++) {
     //std::cout << it2 -> first << "\t" << it2 -> second << "\n";
     sortedstring   <<std::left << std::setw(8) << std::setfill(' ') <<it2 -> second;
     sortedstring <<std::right<<std::setw(15) << std::setfill(' ')<<it2 -> first<<std::endl;
     //sprintf(sortedstring,"%-20s%4d\n",(it2 -> second).c_str(),it2 -> first);
+    nb++;
   }
   return sortedstring.str();
 }
@@ -87,7 +88,7 @@ std::string LeaderBoard::getStringSortedByScore(){
 void LeaderBoard::affiche() {
   std::map < std::string, int > ::iterator it;
   for (it = liste.begin(); it != liste.end(); it++) {
-    std::cout << it -> first << "\t" << it -> second << "\n";
+//    std::cout << it -> first << "\t" << it -> second << "\n";
   }
 }
 

@@ -31,8 +31,8 @@ void Player::setNbPions(int x ){
 }
 
 void Player::entrerNom(){
-    std::cout<< "taper le nom du joueur :"<<std::endl;
-    std::cin>>name;
+//    std::cout<< "taper le nom du joueur :"<<std::endl;
+//    std::cin>>name;
 }
 
 void Player::setNom(std::string n){

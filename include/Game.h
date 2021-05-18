@@ -22,10 +22,11 @@ class Game
         int gameOver();
         Player getPlayer(int);
         int startGame();
-        void playGUI(sf::RenderWindow &);
+        int playGUI(sf::RenderWindow &);
         bool jouerTourGUI(int,int,int &tour,int *,int&);
         void randomizeFirstPlayer();
         int startGameGUI();
+        void reinitialize();
 
         sf::Sprite pionB;
         sf::Sprite pionN;
