@@ -22,22 +22,22 @@ int random(int * tab);
 int calculated_move(int * tab);
 
 Game::Game() {}
-int Game::startGameGUI(){
-    int replay=0;
-    //do{
-           // if(replay)
-            // reinitialize();
-    std::string nom1,nom2;
-    int adversaire;
-    sf::RenderWindow &window = gui.GraphicDebutJeu(nom1,nom2,adversaire);
-    //sf::RenderWindow &window = gui.DebutJeu(nom1,nom2,adversaire);
-    players[0].setNom(nom1);
-    players[1].setNom(nom2);
-    initiate(adversaire);//adversaire 0 Friend 1 CPU1 2 CPU2
-    replay = playGUI(window);
-    //}while(replay);
-    if(replay)
-        startGameGUI();
+int Game::startGameGUI() {
+  int replay = 0;
+  //do{
+  // if(replay)
+  // reinitialize();
+  std::string nom1, nom2;
+  int adversaire;
+  sf::RenderWindow & window = gui.GraphicDebutJeu(nom1, nom2, adversaire);
+  //sf::RenderWindow &window = gui.DebutJeu(nom1,nom2,adversaire);
+  players[0].setNom(nom1);
+  players[1].setNom(nom2);
+  initiate(adversaire); //adversaire 0 Friend 1 CPU1 2 CPU2
+  replay = playGUI(window);
+  //}while(replay);
+  if (replay)
+    startGameGUI();
 }
 
 int Game::startGame() {
@@ -54,14 +54,13 @@ int Game::startGame() {
   } while (othellier.getnbPionsTotale() < 64);
 
   //afficher gagnant
-  if (getWinner().length() == 0){
-//    std::cout << "Match Nul" << std::endl;
+  if (getWinner().length() == 0) {
+    //    std::cout << "Match Nul" << std::endl;
+  } else {
+    //    std::cout << "Le jouer " << getWinner() << " a gagné!";
   }
-  else{
-//    std::cout << "Le jouer " << getWinner() << " a gagné!";
-  }
- // std::cout << "Le score final:\n" << players[0].getName() << " : " << players[0].getNbPions() << std::endl;
- // std::cout << players[1].getName() << " : " << players[1].getNbPions() << std::endl;
+  // std::cout << "Le score final:\n" << players[0].getName() << " : " << players[0].getNbPions() << std::endl;
+  // std::cout << players[1].getName() << " : " << players[1].getNbPions() << std::endl;
 
   return 0;
 }
@@ -75,7 +74,7 @@ int Game::scoreupdate() {
     for (int j = 0; j < 8; j++) {
       if (othellier.getCase(i, j).getCouleur() == players[0].getcolor()) {
         players[0].increment_nbPion(1);
-      } else if (othellier.getCase(i, j).getCouleur() == players[1].getcolor())  {
+      } else if (othellier.getCase(i, j).getCouleur() == players[1].getcolor()) {
         players[1].increment_nbPion(1);
       }
     }
@@ -86,12 +85,12 @@ int Game::jouerTour(int & c) // nb  ddesigne  le tour de role de chaque joueur  
   int * tab; // enregistre les id des cases accessibles a chaque tour
   int x, y;
   std::string a; // pour stocker l'entree du clavier
-//  std::cout << "score du joueur " << players[0].getName() << " est : " << players[0].getNbPions() << std::endl;
- // std::cout << "score du joueur " << players[1].getName() << " est : " << players[1].getNbPions() << std::endl;
+  //  std::cout << "score du joueur " << players[0].getName() << " est : " << players[0].getNbPions() << std::endl;
+  // std::cout << "score du joueur " << players[1].getName() << " est : " << players[1].getNbPions() << std::endl;
 
   do {
     std::string nom = players[c % 2].getName();
-//    std::cout << nom << " play now" << std::endl;
+    //    std::cout << nom << " play now" << std::endl;
     log << nom << " play now" << std::endl;
     othellier.possibleMoves(players[c % 2].getcolor()); // tableaux des id // possibles moves par rapport les couleurs
     for (int i = 0; i < 64; i++) {
@@ -99,7 +98,7 @@ int Game::jouerTour(int & c) // nb  ddesigne  le tour de role de chaque joueur  
     }
     log << std::endl;
     if (tabEmpty(tab)) {
-//      std::cout << players[c % 2].getName() << " ne peut rien jouer" << std::endl;
+      //      std::cout << players[c % 2].getName() << " ne peut rien jouer" << std::endl;
       log << players[c % 2].getName() << " ne peut rien jouer" << std::endl;
       c++;
       return 0;
@@ -119,9 +118,9 @@ int Game::jouerTour(int & c) // nb  ddesigne  le tour de role de chaque joueur  
         log << players[c % 2].getName() << " a joué" << (char)(y + 'a') << x + 1 << std::endl;
         break;
       } else {
-//        std::cout << std::endl;
- //       std::cout << "ajouter la position du pion a jouer  sous la forme ' lettreChiffre '" << std::endl; // lecture de lentree de joueur
-  //      std::cin >> a[0] >> a[1]; // 1ere char 2 eme char
+        //        std::cout << std::endl;
+        //       std::cout << "ajouter la position du pion a jouer  sous la forme ' lettreChiffre '" << std::endl; // lecture de lentree de joueur
+        //      std::cin >> a[0] >> a[1]; // 1ere char 2 eme char
         y = (a[0] - 'a'); // conversion du char vers int
         x = (a[1] - '1');
 
@@ -245,7 +244,7 @@ int calculated_move(int * tab) {
 }
 
 sf::Vector2i posInitiale(127, 119);
-int Game::playGUI(sf::RenderWindow &window) {
+int Game::playGUI(sf::RenderWindow & window) {
 
   //cursor joueur blanc
   sf::Image cursor1;
@@ -270,25 +269,25 @@ int Game::playGUI(sf::RenderWindow &window) {
   sf::Sprite bgOth(imgOth);
 
   sf::Texture blancblocAdd;
-blancblocAdd.loadFromFile("img/Othello/bloc_blanc_S.png");
-blancblocAdd.setSmooth(true);
-sf::Texture blancbloc;
-blancbloc.loadFromFile("img/Othello/bloc_blanc_NS.png");
-blancbloc.setSmooth(true);
+  blancblocAdd.loadFromFile("img/Othello/bloc_blanc_S.png");
+  blancblocAdd.setSmooth(true);
+  sf::Texture blancbloc;
+  blancbloc.loadFromFile("img/Othello/bloc_blanc_NS.png");
+  blancbloc.setSmooth(true);
 
-sf::Texture NoirblocAdd;
-NoirblocAdd.loadFromFile("img/Othello/bloc_noir_S.png");
-NoirblocAdd.setSmooth(true);
+  sf::Texture NoirblocAdd;
+  NoirblocAdd.loadFromFile("img/Othello/bloc_noir_S.png");
+  NoirblocAdd.setSmooth(true);
 
-sf::Texture noirbloc;
-noirbloc.loadFromFile("img/Othello/bloc_noir_NS.png");
-noirbloc.setSmooth(true);
+  sf::Texture noirbloc;
+  noirbloc.loadFromFile("img/Othello/bloc_noir_NS.png");
+  noirbloc.setSmooth(true);
 
- sf::Sprite noirP(noirbloc);
-    noirP.setPosition(735,315);
+  sf::Sprite noirP(noirbloc);
+  noirP.setPosition(735, 315);
 
-    sf::Sprite blcB(blancbloc);
-    blcB.setPosition(735,205);
+  sf::Sprite blcB(blancbloc);
+  blcB.setPosition(735, 205);
 
   sf::Texture imgPionB;
   imgPionB.loadFromFile("img/Othello/pionblanc.png");
@@ -350,12 +349,12 @@ noirbloc.setSmooth(true);
       }
     }
     //othellier.possibleMoves(players[tour % 2].getcolor());
-    if(tabEmpty(tab)){
-        tour++;
-        othellier.possibleMoves(players[tour%2].getcolor());
+    if (tabEmpty(tab)) {
+      tour++;
+      othellier.possibleMoves(players[tour % 2].getcolor());
     }
     if (players[tour % 2].isBot() && gameOn) {
-            //if(!tabEmpty(tab)){
+      //if(!tabEmpty(tab)){
       log << "in bot move\n";
 
       int bot_move;
@@ -369,7 +368,7 @@ noirbloc.setSmooth(true);
       log << "gamecontinues = " << gameContinues << "\n";
       jouerTourGUI(y, x, tour, tab, gameContinues);
       log << "out of bot move\n";
-         //   }else tour++;
+      //   }else tour++;
     }
     sf::Event event;
     while (window.pollEvent(event)) {
@@ -378,9 +377,9 @@ noirbloc.setSmooth(true);
         window.close();
       if (event.type == sf::Event::MouseButtonPressed)
         if (event.key.code == sf::Mouse::Left) {
-            sf::Vector2i pos = sf::Mouse::getPosition(window);
-            int i = pos.x;
-            int j = pos.y;
+          sf::Vector2i pos = sf::Mouse::getPosition(window);
+          int i = pos.x;
+          int j = pos.y;
           if (gameOn == true) {
 
             if (i > 127 && i < 127 + 69 * 8 && j > 118 && j < 118 + 69 * 8) {
@@ -388,14 +387,17 @@ noirbloc.setSmooth(true);
               j = (pos.y - 118) / 69;
               gameOn = jouerTourGUI(i, j, tour, tab, gameContinues);
             }
-          }else{
+          } else {
+              leaderBoard.readListeFromFile();
+              leaderBoard.addScore(getPlayerWinner().getName(), getPlayerWinner().getNbPions() * 10);
+              leaderBoard.writeListeToFile();
             if (i > 429 && i < 489 && j > 357 && j < 417) {
-                    //REPLAY
-                    gameOn = true;
-                     reinitialize();
+              //REPLAY
+              gameOn = true;
+              reinitialize();
               return 1;
-            }else if (i > 511 && i < 571 && j > 357 && j < 417){
-                window.close();
+            } else if (i > 511 && i < 571 && j > 357 && j < 417) {
+              window.close();
             }
           }
         }
@@ -412,23 +414,21 @@ noirbloc.setSmooth(true);
 
     if (gameOn) {
       if (mousex > 127 && mousex < 127 + 69 * 8 && mousey > 118 && mousey < 118 + 69 * 8) {
-        if (tour % 2){
+        if (tour % 2) {
           window.setMouseCursor(c1);
           noirP.setTexture(noirbloc);
           blcB.setTexture(blancblocAdd);
-        }
-        else{
+        } else {
           window.setMouseCursor(c2);
           noirP.setTexture(NoirblocAdd);
           blcB.setTexture(blancbloc);
         }
       } else
         window.setMouseCursor(syscursor);
-        window.clear();
+      window.clear();
       window.draw(bgOth);
       window.draw(noirP);
       window.draw(blcB);
-
 
       for (int i = 0; i < 8; i++)
         for (int j = 0; j < 8; j++)
@@ -442,6 +442,7 @@ noirbloc.setSmooth(true);
       window.draw(nomJ0);
       window.draw(nomJ1);
     } else {
+      //Game Over Window
       window.setMouseCursor(syscursor);
       sf::Text gameover(getPlayerWinner().getName() + " " + std::to_string(getPlayerWinner().getNbPions()), font);
 
@@ -456,19 +457,19 @@ noirbloc.setSmooth(true);
       replayImg.loadFromFile("img/Othello/replay.png");
       replayImg.setSmooth(true);
       replayBtn.setTexture(replayImg);
-      replayBtn.setPosition(429,357);
+      replayBtn.setPosition(429, 357);
 
       sf::Texture exitImg;
       sf::Sprite exitBtn;
       exitImg.loadFromFile("img/Othello/back.png");
       exitImg.setSmooth(true);
       exitBtn.setTexture(exitImg);
-      exitBtn.setPosition(511,357);
+      exitBtn.setPosition(511, 357);
 
       gameover.setCharacterSize(40);
       gameover.setStyle(sf::Text::Bold);
       gameover.setFillColor(sf::Color::White);
-      gameover.setPosition(418,298);
+      gameover.setPosition(418, 298);
 
       window.draw(bgOth);
       for (int i = 0; i < 8; i++)
@@ -494,61 +495,27 @@ noirbloc.setSmooth(true);
     window.display();
 
   }
-  if (!gameOn) {
-    leaderBoard.readListeFromFile();
-    leaderBoard.addScore(getPlayerWinner().getName(), getPlayerWinner().getNbPions() * 10);
-    leaderBoard.writeListeToFile();
-    leaderBoard.getSortedByScore();
-
-  }
 
 }
 
-bool Game::jouerTourGUI(int i, int j, int & tour, int * tab, int & gameContinues) {/*
-    log<<"in jouerTourGUI()\n";
+bool Game::jouerTourGUI(int i, int j, int & tour, int * tab, int & gameContinues) {
   othellier.printBoard();
+
   if (tabEmpty(tab)) {
     tour++;
-    gameContinues--;
-    log << "tab is empty\n";
     othellier.possibleMoves(players[tour % 2].getcolor());
-    if (gameContinues < 1){
-            log<<" 477jouerTourGUI() returned false and tab is empty\n";
-      return false;
-    }
-    log<<"480in jouerTourGUI()returned true and tab is empty\n";
-    return true;
+    gameContinues--;
   } else if (tab[j * 8 + i] != 0) {
     othellier.ajouterPion(j, i, players[tour % 2].getcolor());
     othellier.changerPion(j, i, players[tour % 2].getcolor());
     tour++;
-    gameContinues = 2;
-    othellier.possibleMoves(players[tour % 2].getcolor());
-    log<<"499 before scoreupdate()\n";
-    scoreupdate();
-    log<<"501 in jouerTourGUI() in tab[j * 8 + i] != 0\n";
-    log<<"503in jouerTourGUI()returned true\n";
-    return true;
-  }
-  return true;*/
-   othellier.printBoard();
-
-   if (tabEmpty(tab)) {
-    tour++;
-    othellier.possibleMoves(players[tour % 2].getcolor());
-    gameContinues--;
-    }
-    else if (tab[j * 8 + i] != 0) {
-    othellier.ajouterPion(j, i, players[tour % 2].getcolor());
-    othellier.changerPion(j, i, players[tour % 2].getcolor());
-    tour++;
     othellier.possibleMoves(players[tour % 2].getcolor());
     gameContinues = 2;
     scoreupdate();
   }
 
-    if (gameContinues < 1)
-      return false;
+  if (gameContinues < 1)
+    return false;
   return true;
 
 }
@@ -563,12 +530,12 @@ void Game::randomizeFirstPlayer() {
   }
 }
 
-void Game::reinitialize(){
-    for(int i =0; i < 8; i++)
-        for(int j =0; j < 8; j++)
-            othellier.getCase(i,j).setCouleur(-1);
-    scoreupdate();
-    othellier.setnbPionsTotale(4);
-    players[0].setNbPions(2);
-    players[1].setNbPions(2);
+void Game::reinitialize() {
+  for (int i = 0; i < 8; i++)
+    for (int j = 0; j < 8; j++)
+      othellier.getCase(i, j).setCouleur(-1);
+  scoreupdate();
+  othellier.setnbPionsTotale(4);
+  players[0].setNbPions(2);
+  players[1].setNbPions(2);
 }

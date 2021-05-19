@@ -416,6 +416,8 @@ int GUI::InitialiseJeu(int adversaire) {
   sf::Text playerText;
   sf::String playerInput1;
   sf::Text playerText1;
+  sf::String playerInput2;
+  sf::Text playerText2;
   sf::Font font;
   sf::Font font2;
   font2.loadFromFile("square_721_bt.ttf");
@@ -439,7 +441,10 @@ int GUI::InitialiseJeu(int adversaire) {
   int inj = 29;
   bool boolean = false;
   bool boolean1 = false;
-  int bol = 0, bol1 = 0;
+   bool boolean2 = false;
+  int bol = 0 ;
+  int bol1 = 0;
+  int bol2 = 0;
   bool mouseIn = false;
   while (window.isOpen()) {
     sf::Vector2i pos = sf::Mouse::getPosition(window);
@@ -538,6 +543,8 @@ int GUI::InitialiseJeu(int adversaire) {
             }
             if (i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51) { //RETOUR
               return 5;
+              boolean=false;
+              boolean1=false;
             }
             if (i > 25 && i < 75 && j > 570 && j < 620) { //MUSIC
               if (initialSetMusic == 0) {
@@ -579,7 +586,6 @@ int GUI::InitialiseJeu(int adversaire) {
     }
     if (!(i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51) && !(j > 594 && j < 594 + 85 && i > 393 && i < 393 + 207))
         mouseIn = false;
-
     playerText.setPosition(380, 480);
     playerText.setFont(font);
     playerText.setFillColor(sf::Color::White);
@@ -588,7 +594,11 @@ int GUI::InitialiseJeu(int adversaire) {
     window.draw(BtplayBTN_NC);
     window.draw(error);
     window.draw(BackButton);
-  } else {
+  }
+
+
+
+   else {
     window.draw(bgOth);
     if (inc > 207) {
       window.draw(BttwoPlayer);
@@ -610,59 +620,63 @@ int GUI::InitialiseJeu(int adversaire) {
         if (event.type == sf::Event::Closed)
           window.close();
         if (event.type == sf::Event::MouseButtonPressed) {
-          if (!boolean)
-            if (j > 461 && j < 461 + 67 && i > 144 && i < 144 + 323) {
-              boolean = true;
-              if (bol == 0)
-                playerInput += "_";
-              bol = 1;
-            } else {
-              boolean = false;
-              if (bol == 1) {
-                playerInput.erase(playerInput.getSize() - 1);
-                playerText.setString(playerInput);
-                bol = 0;
-              }
-            }
-          if (!boolean1)
-            if (j > 461 && j < 461 + 67 && i > 590 && i < 590 + 323) {
+            if (event.key.code == sf::Mouse::Left) {
+        if (j > 461 && j < 461 + 67 && i > 144 && i < 144 + 323)
+        {
               boolean1 = true;
-              if (bol1 == 0) playerInput1 += "_";
+               if (bol2 == 0){playerInput2 += "_";
+               }
+              bol2 = 1;
+         }
+         else
+         {
+              boolean1 = false;
+              if (bol2 == 1){playerInput2.erase(playerInput2.getSize() - 1);playerText2.setString(playerInput2);}
+               bol2 = 0;
+        }
+
+           if (j > 461 && j < 461 + 67 && i > 590 && i < 590 + 323) {
+              boolean2 = true;
+             if (bol1 == 0) playerInput1 += "_";
               bol1 = 1;
             } else {
-              boolean1 = false;
-              if (bol1 == 1) {
-                playerInput1.erase(playerInput1.getSize() - 1);
-                playerText1.setString(playerInput1);
-                bol1 = 0;
-              }
+              boolean2 = false;
+              if (bol1 == 1)
+                {playerInput1.erase(playerInput1.getSize() - 1);
+                 playerText1.setString(playerInput1);
+               bol1 = 0;}
             }
-        }
-        if (boolean == true) {
-          playerText.setString(playerInput);
-          if (event.type == sf::Event::TextEntered) {
+        }}
+        std::cout<<"text 1 : "<<boolean1<<std::endl;
+        std::cout<<"text 2 : "<<boolean2<<std::endl;
+        if (boolean1) {
+          playerText2.setString(playerInput2);
+                 if (event.type == sf::Event::TextEntered) {
             if ((event.text.unicode > 64) && (event.text.unicode < 91) || (event.text.unicode > 96) && (event.text.unicode < 123))
-                {
-              if (playerInput.getSize() < 9) {
-                if (playerInput.getSize() != 0) {
-                  playerInput.erase(playerInput.getSize() - 1);
+            {
+              if (playerInput2.getSize() < 9) {
+                if (playerInput2.getSize() != 0) {
+                  playerInput2.erase(playerInput2.getSize() - 1);
                 }
-                playerInput += event.text.unicode;
-                playerInput += "_";
-                playerText.setString(playerInput);
+                playerInput2 += event.text.unicode;
+                playerInput2 += "_";
+                playerText2.setString(playerInput2);
               }
             }
             if (event.text.unicode == 8) {
-              if (playerInput.getSize() != 0)
-                playerInput.erase(playerInput.getSize() - 1);
-              playerText.setString(playerInput);
+                playerInput2.erase(playerInput2.getSize() - 1);
+              if (playerInput2.getSize() != 0)
+                playerInput2.erase(playerInput2.getSize() - 1);
+                playerInput2 += "_";
+              playerText2.setString(playerInput2);
             }
           }
         }
-        if (boolean1 == true) {
+        if (boolean2 == true) {
           playerText1.setString(playerInput1);
-          if (event.type == sf::Event::TextEntered) {
-            if ((event.text.unicode > 64) && (event.text.unicode < 91) || (event.text.unicode > 96) && (event.text.unicode < 123)) {
+                 if (event.type == sf::Event::TextEntered) {
+            if ((event.text.unicode > 64) && (event.text.unicode < 91) || (event.text.unicode > 96) && (event.text.unicode < 123))
+            {
               if (playerInput1.getSize() < 9) {
                 if (playerInput1.getSize() != 0) {
                   playerInput1.erase(playerInput1.getSize() - 1);
@@ -673,25 +687,11 @@ int GUI::InitialiseJeu(int adversaire) {
               }
             }
             if (event.text.unicode == 8) {
+                playerInput1.erase(playerInput1.getSize() - 1);
               if (playerInput1.getSize() != 0)
                 playerInput1.erase(playerInput1.getSize() - 1);
+                playerInput1 += "_";
               playerText1.setString(playerInput1);
-            }
-          }
-        }
-        if (event.type == sf::Event::TextEntered) {
-          if ((event.text.unicode == 13)) {
-            if ((playerInput1.getSize() != 0) && (playerInput.getSize() != 0)) {
-              nameJ1 = playerInput1;
-              nameJ2 = playerInput;
-              startgame = true;
-              return 1;
-            } else {
-              error.setPosition(430, 540);
-              error.setString("name invalid");
-              error.setCharacterSize(23);
-              error.setFillColor(sf::Color::Red);
-              error.setFont(font2);
             }
           }
         }
@@ -699,21 +699,21 @@ int GUI::InitialiseJeu(int adversaire) {
         if (event.type == sf::Event::MouseButtonPressed) {
           if (event.key.code == sf::Mouse::Left) {
             if (i > 50 && i < 50 + 36 && j > 60 && j < 60 + 51) {
-              return 5;
+              return 0;
             }
             if (j > 594 && j < 594 + 85 && i > 393 && i < 393 + 207) {
-              if (playerInput == playerInput1) {
+              if (playerInput1 == playerInput2) {
                 error.setPosition(360, 540);
                 error.setString("two name is the same");
                 error.setCharacterSize(23);
                 error.setFillColor(sf::Color::Red);
                 error.setFont(font2);
               } else
-              if ((playerInput1.getSize() != 0) && (playerInput.getSize() != 0)) {
+              if ((playerInput1.getSize() != 0) && (playerInput2.getSize() != 0)) {
                 nameJ1 = playerInput1;
-                nameJ2 = playerInput;
-                startgame = true;
+                nameJ2 = playerInput2;
                 return 1;
+                //return 1;
               } else {
                 error.setPosition(430, 540);
                 error.setString("name invalid");
@@ -768,11 +768,11 @@ int GUI::InitialiseJeu(int adversaire) {
           }
         }
       }
-      playerText.setPosition(170, 480);
-      playerText.setFont(font);
-      playerText.setFillColor(sf::Color::White);
-      playerText.setCharacterSize(30);
-      window.draw(playerText);
+      playerText2.setPosition(170, 480);
+      playerText2.setFont(font);
+      playerText2.setFillColor(sf::Color::White);
+      playerText2.setCharacterSize(30);
+      window.draw(playerText2);
       playerText1.setPosition(600, 480);
       playerText1.setFont(font);
       playerText1.setFillColor(sf::Color::White);
