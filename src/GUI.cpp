@@ -6,20 +6,7 @@
 
 #include <SFML/Audio.hpp>
 
-//sf::Music //musique;
-//sf::Music sound;
-sf::Sprite MusicIconButton;
-sf::Sprite SoundIconButton;
-int initial = 0, initialSetMusic = 0, initialSetSound = 0;
-sf::Texture SoundIconOn;
-sf::Texture SoundIconOff;
-sf::Texture MusicIconOn;
-sf::Texture MusicIconOff;
-int difficulty = 1;
-int adv = 0;//=1 si VS FRIEND 0 sinon
-int initialement = 0;
-std::string nameJ1, nameJ2;
-bool startgame=false;
+
  GUI::GUI(){
     window.create(sf::VideoMode(1000, 700), "Othello", sf::Style::Close | sf::Style::Titlebar);
     window.setFramerateLimit(30);
@@ -29,75 +16,23 @@ bool startgame=false;
     icon.loadFromFile("img/icon.png");
     const uint8_t * iconBlock = icon.getPixelsPtr();
     window.setIcon(50, 49, iconBlock);
- }
-/*sf::RenderWindow & GUI::DebutJeu(std::string & nom1, std::string & nom2, int &adversaire) {
 
 
-  int statue = GraphicDebutJeu();
-  std::cout << statue << std::endl;
-  if (statue == 1) {
-    window.clear();
-    //std::string name[2];
-    do {
-      statue = choicegame(); // = CPU si 2 // = FRIEND si 1
-      if(statue == 1){
-        adversaire = 0;
-      }
-        else if(statue == 2){
-        if(difficulty == 1)
-            adversaire = 1;
-        else
-            adversaire = 2;
-      }
-      if (statue == 5) //retour
-        DebutJeu(nom1,nom2, adversaire);
-      InitialiseJeu(statue, nom1, nom2);
-    } while (statue == 5);
-    //players[0].setNom(name[0]);
-    //players[1].setNom(name[1]);
-    //initiate(statue,name[0],name[1]);
-    std::cout << "baaed l'initialise";
-    //GUI(window);
-    return window;
-  } else if (statue == 10) {
-    settingswindow();
-    DebutJeu(nom1, nom2, adversaire);
-  } else if (statue == 20) {
-    window.clear();
-    scorewindow();
-    DebutJeu(nom1, nom2, adversaire);
-  }
-}*/
-sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int& adversaire) {
-  if (initial == 0) {
-    //musique.openFromFile("music.ogg");
-    //sound.setVolume(30);
-    //musique.setVolume(50);
-    //musique.play();
-    initial++;
-  }
-  //std::cout << initial;
-  sf::Texture Background;
   Background.loadFromFile("img/play/BackGround.png");
 
-  sf::Texture ButtonNC;
+
   ButtonNC.loadFromFile("img/play/button.png");
 
-  sf::Texture ButtonC;
+
   ButtonC.loadFromFile("img/play/Button_Clicked.png");
 
-  sf::Font font;
-  sf::Font font2;
+
   font2.loadFromFile("square_721_bt.ttf");
   font.loadFromFile("AvenirLTStd-Black.otf");
 
-  sf::Sprite ButtonPlay;
-  sf::Sprite ButtonSettings;
-  sf::Sprite ButtonScore;
 
-  sf::Text playText;
-  sf::Text settingsText;
-  sf::Text ScoreText;
+
+
   //------------------------------------
   ButtonPlay.setPosition(374, 174);
   ButtonPlay.setTexture(ButtonNC);
@@ -126,7 +61,74 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
   ScoreText.setCharacterSize(65);
   ScoreText.setFillColor(sf::Color::White);
   //-----------------------------------
-  sf::Sprite BackgroundSupport(Background);
+BackgroundSupport.setTexture(Background);
+
+
+
+
+backto.loadFromFile("img/commun/back.png");
+    BackButton.setTexture(backto);
+  BackButton.setPosition(50, 60);
+
+  imgOth.loadFromFile("img/gameBegin/BackgroundImg2.png");
+  imgOth.setSmooth(true);
+  bgOth.setTexture(imgOth);
+
+  PlayervspcNC.loadFromFile("img/gameBegin/PlayervspcNC.png");
+  PlayervspcNC.setSmooth(true);
+    BtPlayervspcNC.setTexture(PlayervspcNC);
+  BtPlayervspcNC.setPosition(291, 217);
+
+  twoPlayerNC.loadFromFile("img/gameBegin/twoPlayerNC.png");
+  twoPlayerNC.setSmooth(true);
+  BttwoPlayer.setTexture(twoPlayerNC);
+
+  BttwoPlayer.setPosition(291, 427);
+  MusicIconOn.loadFromFile("img/commun/music_on.png");
+  MusicIconOff.loadFromFile("img/commun/music_off.png");
+
+
+
+  AddName.loadFromFile("img/gameBegin/AddNamePlayer.png");
+  AddName.setSmooth(true);
+
+
+  BackButton.setPosition(50, 60);
+
+  AddNameTwoPlayer.loadFromFile("img/gameBegin/AddNameTwoPlayer.png");
+  AddNameTwoPlayer.setSmooth(true);
+  AddNametext.setTexture(AddName);
+  AddNametext.setPosition(210, 350);
+
+  playBTN_NC.loadFromFile("img/gameBegin/playBTN_NC.png");
+  playBTN_NC.setSmooth(true);
+
+  difficulty1.loadFromFile("img/settings/level1.png");
+
+  difficulty2.loadFromFile("img/settings/level2.png");
+
+  difficultyButton.setPosition(449, 508);
+
+  background.loadFromFile("img/settings/background.png");
+  backgroundAdd.setTexture(background);
+  music_on.loadFromFile("img/settings/music_on.png");
+
+  music_off.loadFromFile("img/settings/music_off.png");
+  scoreList.setFont(font2);
+  scoreList.setCharacterSize(30);
+ }
+
+sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int& adversaire) {
+  if (initial == 0) {
+    //musique.openFromFile("music.ogg");
+    //sound.setVolume(30);
+    //musique.setVolume(50);
+    //musique.play();
+    initial++;
+  }
+  //std::cout << initial;
+
+
   bool mouseIn = false;
   startgame = false;
   while (window.isOpen()) {
@@ -142,7 +144,6 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
         }
     //musique.getLoop();
     window.draw(BackgroundSupport);
-    sf::Event event;
     sf::Vector2i pos = sf::Mouse::getPosition(window);
     int MouseX = pos.x;
     int MouseY = pos.y;
@@ -242,26 +243,8 @@ sf::RenderWindow& GUI::GraphicDebutJeu(std::string &nom1, std::string &nom2, int
   }
 }
 int GUI::choicegame() {
-  sf::Texture backto;
-  backto.loadFromFile("img/commun/back.png");
-  sf::Sprite BackButton(backto);
-  BackButton.setPosition(50, 60);
-  sf::Texture imgOth;
-  imgOth.loadFromFile("img/gameBegin/BackgroundImg2.png");
-  imgOth.setSmooth(true);
-  sf::Sprite bgOth(imgOth);
-  sf::Texture PlayervspcNC;
-  PlayervspcNC.loadFromFile("img/gameBegin/PlayervspcNC.png");
-  PlayervspcNC.setSmooth(true);
-  sf::Sprite BtPlayervspcNC(PlayervspcNC);
-  BtPlayervspcNC.setPosition(291, 217);
-  sf::Texture twoPlayerNC;
-  twoPlayerNC.loadFromFile("img/gameBegin/twoPlayerNC.png");
-  twoPlayerNC.setSmooth(true);
-  sf::Sprite BttwoPlayer(twoPlayerNC);
-  BttwoPlayer.setPosition(291, 427);
-  MusicIconOn.loadFromFile("img/commun/music_on.png");
-  MusicIconOff.loadFromFile("img/commun/music_off.png");
+
+
   if (initialSetMusic == 0) MusicIconButton.setTexture(MusicIconOn);
   else MusicIconButton.setTexture(MusicIconOff);
   MusicIconButton.setPosition(25, 570);
@@ -279,7 +262,7 @@ int GUI::choicegame() {
     window.draw(bgOth);
     window.draw(BtPlayervspcNC);
     window.draw(BttwoPlayer);
-    sf::Event event;
+
     sf::Vector2i pos = sf::Mouse::getPosition(window);
     int i = pos.x;
     int j = pos.y;
@@ -381,20 +364,10 @@ int GUI::choicegame() {
   }
 }
 int GUI::InitialiseJeu(int adversaire) {
-  sf::Texture AddName;
-  AddName.loadFromFile("img/gameBegin/AddNamePlayer.png");
-  AddName.setSmooth(true);
-  sf::Texture backto;
-  backto.loadFromFile("img/commun/back.png");
-  sf::Sprite BackButton(backto);
-  BackButton.setPosition(50, 60);
-  sf::Texture AddNameTwoPlayer;
-  AddNameTwoPlayer.loadFromFile("img/gameBegin/AddNameTwoPlayer.png");
-  AddNameTwoPlayer.setSmooth(true);
-  sf::Sprite AddNametext(AddName);
-  sf::Sprite AddNametext2;
-  AddNametext.setPosition(210, 350);
-  sf::Texture imgOth;
+
+
+
+  /*sf::Texture imgOth;
   imgOth.loadFromFile("img/gameBegin/BackgroundImg2.png");
   imgOth.setSmooth(true);
   sf::Sprite bgOth(imgOth);
@@ -407,10 +380,9 @@ int GUI::InitialiseJeu(int adversaire) {
   twoPlayerNC.loadFromFile("img/gameBegin/twoPlayerNC.png");
   twoPlayerNC.setSmooth(true);
   sf::Sprite BttwoPlayer(twoPlayerNC);
-  BttwoPlayer.setPosition(291, 427);
-  sf::Texture playBTN_NC;
-  playBTN_NC.loadFromFile("img/gameBegin/playBTN_NC.png");
-  playBTN_NC.setSmooth(true);
+  BttwoPlayer.setPosition(291, 427);*/
+
+
   sf::Sprite BtplayBTN_NC(playBTN_NC);
   sf::String playerInput;
   sf::Text playerText;
@@ -418,10 +390,10 @@ int GUI::InitialiseJeu(int adversaire) {
   sf::Text playerText1;
   sf::String playerInput2;
   sf::Text playerText2;
-  sf::Font font;
+  /*sf::Font font;
   sf::Font font2;
   font2.loadFromFile("square_721_bt.ttf");
-  font.loadFromFile("AvenirLTStd-Black.otf");
+  font.loadFromFile("AvenirLTStd-Black.otf");*/
   sf::Text error;
   playBTN_NC.loadFromFile("img/gameBegin/playBTN_C.png");
   BtplayBTN_NC.setPosition(393, 591);
@@ -790,24 +762,11 @@ int GUI::InitialiseJeu(int adversaire) {
 }
 
 int GUI::settingswindow() {
-  sf::Texture difficulty1;
-  difficulty1.loadFromFile("img/settings/level1.png");
-  sf::Texture difficulty2;
-  difficulty2.loadFromFile("img/settings/level2.png");
-  sf::Sprite difficultyButton;
-  difficultyButton.setPosition(449, 508);
-  sf::Texture background;
-  background.loadFromFile("img/settings/background.png");
-  sf::Sprite backgroundAdd(background);
-  sf::Texture music_on;
-  music_on.loadFromFile("img/settings/music_on.png");
-  sf::Texture music_off;
-  music_off.loadFromFile("img/settings/music_off.png");
-  sf::Sprite SoundAdd;
+
   if (initialSetSound == 0) SoundAdd.setTexture(music_on);
   else SoundAdd.setTexture(music_off);
   SoundAdd.setPosition(449, 266);
-  sf::Sprite MusicAdd;
+
   if (difficulty == 1)
     difficultyButton.setTexture(difficulty1);
   else
@@ -815,10 +774,10 @@ int GUI::settingswindow() {
   if (initialSetMusic == 0) MusicAdd.setTexture(music_on);
   else MusicAdd.setTexture(music_off);
   MusicAdd.setPosition(449, 387);
-  sf::Texture backto;
+  /*sf::Texture backto;
   backto.loadFromFile("img/commun/back.png");
   sf::Sprite BackButton(backto);
-  BackButton.setPosition(50, 60);
+  BackButton.setPosition(50, 60);*/
   while (window.isOpen()) {
     sf::Event event;
     sf::Vector2i pos = sf::Mouse::getPosition(window);
@@ -885,12 +844,11 @@ int GUI::settingswindow() {
 }
 
 int GUI::scorewindow() {
-  sf::Texture backto;
+  /*sf::Texture backto;
   sf::Font font2;
-  font2.loadFromFile("consolaz.ttf");
-  sf::Text scoreList;
-  scoreList.setFont(font2);
-  scoreList.setCharacterSize(30);
+  font2.loadFromFile("consolaz.ttf");*/
+
+
 
   LeaderBoard l;
   l.readListeFromFile();

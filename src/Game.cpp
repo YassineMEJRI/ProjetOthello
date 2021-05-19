@@ -409,8 +409,9 @@ int Game::playGUI(sf::RenderWindow & window) {
     int mousex = pos.x;
     int mousey = pos.y;
 
-    if (othellier.getnbPionsTotale() >= 64)
+    if (othellier.getnbPionsTotale() >= 64 || players[0].getNbPions()==0 || players[1].getNbPions()==0){
       gameOn = false;
+    }
 
     if (gameOn) {
       if (mousex > 127 && mousex < 127 + 69 * 8 && mousey > 118 && mousey < 118 + 69 * 8) {
@@ -505,6 +506,8 @@ bool Game::jouerTourGUI(int i, int j, int & tour, int * tab, int & gameContinues
     tour++;
     othellier.possibleMoves(players[tour % 2].getcolor());
     gameContinues--;
+    if(gameContinues<=0)
+        return false;
   } else if (tab[j * 8 + i] != 0) {
     othellier.ajouterPion(j, i, players[tour % 2].getcolor());
     othellier.changerPion(j, i, players[tour % 2].getcolor());
