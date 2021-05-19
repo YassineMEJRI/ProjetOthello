@@ -712,8 +712,8 @@ int GUI::InitialiseJeu(int adversaire) {
               if ((playerInput1.getSize() != 0) && (playerInput2.getSize() != 0)) {
                 nameJ1 = playerInput1;
                 nameJ2 = playerInput2;
+                startgame=true;
                 return 1;
-                //return 1;
               } else {
                 error.setPosition(430, 540);
                 error.setString("name invalid");
